@@ -1,0 +1,33 @@
+h2{
+  margin-left: 20px;
+}
+
+p{
+  margin: 10px 0 10px;
+}
+
+.row{
+  margin: 15px 0 15px 20px;
+  position: relative;
+}
+
+.list-item-wrapper .info-wrapper {
+  display: inline-block;
+}
+
+.list-item-wrapper button {
+  float: right;
+}
+
+.divider {
+  position: absolute;
+  background-color: black;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0
+}
+
+.product{
+  display: inline-block;
+}

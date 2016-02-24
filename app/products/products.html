@@ -1,0 +1,18 @@
+<div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-12">
+    <h2>Products</h2>
+    <div class="row">
+        <button class="btn btn-primary" ng-click="sortProducts()">Sort</button>
+        <button class="btn btn-primary" ng-click="skipProducts()">Skip</button>
+        <button class="btn btn-primary" ng-click="limitProducts()">Limit4</button>
+        <button class="btn btn-primary" ng-click="loadProducts()">Reload data</button>
+    </div>
+
+    <div class="row" ng-repeat="product in products">
+        <div class="list-item-wrapper">
+            <p class="product">
+                <b>{{product.productname}}</b> {{product.productdesc}}
+            </p>
+            <button type="button" class="btn btn-danger" ng-click="deleteProduct(product, $index)">Delete</button>
+        </div>
+    </div>
+</div>

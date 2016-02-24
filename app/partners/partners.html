@@ -1,0 +1,13 @@
+<div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-12">
+    <h2>VMWare Partners</h2>
+    <div class="row">
+        <button class="btn btn-primary" ng-click="loadPartners()">Reload data</button>
+    </div>
+    <div class="row" ng-repeat="partner in partners">
+        <div class="col-md-5">
+            <p>
+                <b>{{partner.partnername}}</b> {{partner.partnercompany}}
+            </p>
+        </div>
+    </div>
+</div>
