@@ -31,7 +31,18 @@ angular.module('myApp.todos', [])
 
         $scope.syncTodos = function () {
             dataStore.push().then(function (result) {
-                alert('Sync successfully' + result.success.length + ' entities and failed to sync' + result.error.length);
+                alert('Sync successfully ' + result.success.length + ' entities and failed to sync ' + result.error.length);
+                if(result.error.length != 0){
+                    console.log("sync error " + JSON.stringify(result.error));
+                    var fails = [];
+                    result.error.forEach(function(error){
+                       fails.push({
+                           entityId: error._id,
+                           errorDescription: error.error.description
+                       })
+                    });
+                    alert("Fail reasons: " + JSON.stringify(fails));
+                }
             })
         };
 
