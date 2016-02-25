@@ -2,12 +2,12 @@
 
 angular.module('myApp.insert', [])
 
-    .controller('InsertCtrl', ['$scope','$kinvey','$state', function ($scope, $kinvey, $state) {
+    .controller('InsertCtrl', ['$scope','$kinvey', function ($scope, $kinvey) {
 
         var dataStore = $kinvey.DataStore.getInstance('todo',$kinvey.DataStoreType.Sync);
         $scope.todo = {
             action: "",
-            duedate: "",
+            duedate: new Date(),
             completed:false
         };
 
