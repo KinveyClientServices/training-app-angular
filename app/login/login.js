@@ -4,11 +4,8 @@ angular.module('myApp.login', [])
 
     .controller('LoginCtrl', ['$scope', '$kinvey', '$location', function ($scope, $kinvey, $location) {
         $kinvey.User.getActiveUser().then(function (user) {
-            if (user) {
-                $scope.showLogin = false;
-            } else {
-                $scope.showLogin = true;
-            }
+            console.log("active user " + JSON.stringify(user));
+            $scope.showLogin = !user;
         });
 
         $scope.login = function (username, password) {
