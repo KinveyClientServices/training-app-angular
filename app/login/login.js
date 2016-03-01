@@ -6,6 +6,7 @@ angular.module('myApp.login', [])
         $kinvey.User.getActiveUser().then(function (user) {
             console.log("active user " + JSON.stringify(user));
             $scope.showLogin = !user;
+            $scope.$digest();
         });
 
         $scope.login = function (username, password) {
@@ -34,14 +35,16 @@ angular.module('myApp.login', [])
 
         $scope.logout = function () {
             $kinvey.User.getActiveUser().then(function (user) {
+                if (user) {
                     user.logout().then(function () {
                         console.log("logout with success ");
                         $scope.showLogin = true;
                         $scope.$digest();
-                }).catch(function(err){
-                console.log("logout error " + JSON.stringify(err));
-                alert("Error: " + err.description);
-            });
-        })
+                    }).catch(function (err) {
+                        console.log("logout error " + JSON.stringify(err));
+                        alert("Error: " + err.description);
+                    });
+                }
+            })
         }
     }]);
