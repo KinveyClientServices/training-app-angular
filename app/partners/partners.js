@@ -10,7 +10,7 @@ angular.module('myApp.partners', [])
         $scope.loadPartners = function(query){
             dataStore.find().then(function (result) {
                 $scope.partners = result.cache;
-                return result.network;
+                return result.networkPromise;
             }).then(function (partners) {
                 $scope.partners = partners;
                 $scope.$digest();

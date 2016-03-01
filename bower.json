@@ -12,6 +12,6 @@
     "angular-mocks": "~1.4.0",
     "angular-ui-router": "~0.2.15",
     "angular-bootstrap": "~0.14.3",
-    "kinvey-angular-lib": "^3.0.0-beta.7"
+    "kinvey-angular-lib": "3.0.0-beta.8"
   }
 }

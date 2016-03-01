@@ -9,8 +9,9 @@ angular.module('myApp.products', [])
 
         $scope.loadProducts = function(query){
             dataStore.find(query).then(function (result) {
+                console.log(JSON.stringify(result));
                 $scope.products = result.cache;
-                return result.network;
+                return result.networkPromise;
             }).then(function (products) {
                 $scope.products = products;
                 $scope.$digest();
