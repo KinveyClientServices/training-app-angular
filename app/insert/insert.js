@@ -4,7 +4,7 @@ angular.module('myApp.insert', [])
 
     .controller('InsertCtrl', ['$scope','$kinvey', function ($scope, $kinvey) {
 
-        var dataStore = $kinvey.DataStore.getInstance('todo',$kinvey.DataStoreType.Sync);
+        var dataStore = $kinvey.DataStore.getInstance('Todo',$kinvey.DataStoreType.Sync);
         $scope.todo = {
             action: "",
             duedate: new Date(),

@@ -5,7 +5,7 @@ angular.module('myApp.products', [])
     .controller('ProductsCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
         $scope.products = [];
 
-        var dataStore = $kinvey.DataStore.getInstance('vProducts');
+        var dataStore = $kinvey.DataStore.getInstance('Products');
 
         $scope.loadProducts = function(query){
             dataStore.find(query).then(function (result) {

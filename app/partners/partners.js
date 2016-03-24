@@ -5,7 +5,7 @@ angular.module('myApp.partners', [])
     .controller('PartnersCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
         $scope.partners = [];
 
-        var dataStore = $kinvey.DataStore.getInstance('partner');
+        var dataStore = $kinvey.DataStore.getInstance('Partner');
 
         $scope.loadPartners = function(query){
             dataStore.find().then(function (result) {

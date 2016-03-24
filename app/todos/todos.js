@@ -5,7 +5,7 @@ angular.module('myApp.todos', [])
     .controller('TodoCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
         $scope.todos = [];
 
-        var dataStore = $kinvey.DataStore.getInstance('todo', $kinvey.DataStoreType.Sync);
+        var dataStore = $kinvey.DataStore.getInstance('Todo', $kinvey.DataStoreType.Sync);
 
         $scope.loadTodos = function () {
             dataStore.find().then(function (result) {
