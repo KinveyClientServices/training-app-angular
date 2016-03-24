@@ -17,7 +17,8 @@ angular.module('myApp.main', [])
             {heading: "Partners", route: "main.partners", active: false},
             {heading: "ToDos", route: "main.todos", active: false},
             {heading: "Collateral", route: "main.collaterals", active: false},
-            {heading: "Insert", route: "main.insert", active: false}
+            {heading: "Insert", route: "main.insert", active: false},
+            {heading: "Employees", route: "main.employees", active: false}
         ];
 
         $scope.$on("$stateChangeSuccess", function () {
