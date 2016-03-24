@@ -14,7 +14,8 @@ var app = angular.module('myApp', [
     'myApp.todos',
     'myApp.insert',
     'myApp.collaterals',
-    "myApp.employees"
+    "myApp.employees",
+    "myApp.media"
 ]);
 
 app.constant('kinveyConfig', {
@@ -74,5 +75,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/employees",
             templateUrl: "employees/employees.html",
             controller: "EmployeesCtrl"
+        })
+        .state("main.media", {
+            url: "/media",
+            templateUrl: "media/medias.html",
+            controller: "MediaCtrl"
         });
 });
