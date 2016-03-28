@@ -1,0 +1,24 @@
+
+<ion-view>
+    <div class="bar bar-header bar-stable">
+        <h1 class="title">Products</h1>
+    </div>
+    <ion-content class="training-content">
+        <div >
+        <div class="button-bar">
+            <button class="button button-positive" ng-click="sortProducts()">Sort</button>
+            <button class="button button-positive" ng-click="skipProducts()">Skip</button>
+            <button class="button button-positive" ng-click="limitProducts()">Limit4</button>
+            <button class="button button-positive" ng-click="loadProducts()">Reload data</button>
+        </div>
+            </div>
+
+        <ion-list>
+            <ion-item ng-repeat="product in products"
+                      class="item-button-right">
+                <b>{{ product.productname }}</b> {{ product.productdesc }}
+                <button type="button" class="button button-assertive" ng-click="deleteProduct(product, $index)">Delete</button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

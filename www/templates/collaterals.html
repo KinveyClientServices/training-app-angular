@@ -1,0 +1,15 @@
+<ion-view>
+    <div class="bar bar-header bar-stable">
+        <h1 class="title">VMWare Collateral</h1>
+    </div>
+    <ion-content class="training-content">
+        <button class="button button-positive" ng-click="loadCollaterals()">Reload data</button>
+        <ion-list>
+            <ion-item ng-repeat="collateral in collaterals"
+                      class="item-button-right">
+                <b>{{ collateral._filename }}</b>
+                <a href="{{ collateral._downloadURL }}" target="_blank">View file</a>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

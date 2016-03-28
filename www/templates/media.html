@@ -1,0 +1,22 @@
+<ion-view>
+    <div class="bar bar-header bar-stable insert-header">
+        <h1 class="title">Create new media</h1>
+    </div>
+    <ion-content class="training-content insert-content">
+        <div class="modal-body">
+            <form>
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">Name</span>
+                        <input type="text" ng-model="media.name">
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="button button-positive" type="button" ng-click="saveMedia(media)">Save</button>
+            <button class="button button-assertive" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+
+    </ion-content>
+</ion-view>

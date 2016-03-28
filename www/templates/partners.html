@@ -1,0 +1,15 @@
+<ion-view>
+    <div class="bar bar-header bar-stable">
+        <h1 class="title">VMWare Partners</h1>
+    </div>
+    <ion-content class="training-content">
+        <button class="button button-positive" ng-click="loadPartners()">Reload data</button>
+        <div class="row" ng-repeat="partner in partners">
+            <div class="col-md-5">
+                <p>
+                    <b>{{ partner.partnername }}</b> {{ partner.partnercompany }}
+                </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

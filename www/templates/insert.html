@@ -1,0 +1,21 @@
+<ion-view>
+    <div class="bar bar-header bar-stable">
+        <h1 class="title">Data Inserts</h1>
+    </div>
+    <ion-content class="training-content">
+        <form ng-submit="insert(todo)">
+            <div class="list">
+                <label class="item item-input">
+                    <label class="input-label">Task</label>
+                    <input type="text" ng-model="todo.action">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Date</span>
+                    <input type="date" ng-model="todo.duedate">
+                </label>
+                <ion-checkbox ng-model="todo.completed">Task Completed?</ion-checkbox>
+            </div>
+            <button class="button button-positive" type="submit">Insert</button>
+        </form>
+    </ion-content>
+</ion-view>

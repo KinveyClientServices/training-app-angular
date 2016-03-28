@@ -1,0 +1,31 @@
+<ion-view>
+    <div class="bar bar-header bar-stable">
+        <h1 class="title" ng-show="showLogin">Login</h1>
+        <h1 class="title" ng-hide="showLogin">Logout</h1>
+    </div>
+    <ion-content class="training-content">
+        <div ng-show="showLogin">
+            <form ng-submit="login(username, password)">
+                <div class="list">
+
+                    <label class="item item-input">
+                        <span class="input-label">Username</span>
+                        <input type="text"  ng-model="username" required>
+                    </label>
+
+                    <label class="item item-input">
+                        <span class="input-label">Password</span>
+                        <input type="password" name="password" id="password" ng-model="password" required>
+                    </label>
+                </div>
+                <button class="button button-positive" type="submit">Login</button>
+            </form>
+
+            <p>Or</p>
+            <button class="button button-positive" ng-click="micLogin()">Login with MIC</button>
+        </div>
+        <div ng-hide="showLogin">
+            <button class="button button-positive" ng-click="logout()">Logout</button>
+        </div>
+    </ion-content>
+</ion-view>
