@@ -78,7 +78,7 @@ angular.module('myApp')
 
         $scope.saveEmployee = function (employee) {
             dataStore.save(employee).then(function (entity) {
-                $uibModalInstance.close(employee);
+                $uibModalInstance.close(entity);
             }).catch(function (err) {
                 console.log("error " + JSON.stringify(err));
                 alert("Error: " + err.description);

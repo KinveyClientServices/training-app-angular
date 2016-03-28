@@ -70,7 +70,7 @@ angular.module('myApp')
 
         $scope.saveMedia = function (media) {
             dataStore.save(media).then(function (entity) {
-                $uibModalInstance.close(media);
+                $uibModalInstance.close(entity);
             }).catch(function (err) {
                 console.log("error " + JSON.stringify(err));
                 alert("Error: " + err.description);
