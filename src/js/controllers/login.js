@@ -1,9 +1,17 @@
-angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', '$location', function ($scope, $kinvey, $location) {
-        $kinvey.User.getActiveUser().then(function (user) {
-            console.log("active user " + JSON.stringify(user));
-            $scope.showLogin = !user;
-            $scope.$digest();
-        });
+angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
+
+    var promise = $kinvey.User.getActiveUser();
+    promise.then(function(user) {
+        if (user) {
+            return user.me();
+        }
+        return user;
+    }).then(function(user) {
+        $scope.showLogin = !user;
+        $scope.$digest();
+    }).catch(function(error) {
+        alert("return error " + JSON.stringify(error));
+    });
 
         $scope.login = function (username, password) {
             var user = new $kinvey.User();
