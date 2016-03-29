@@ -11,6 +11,8 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', function (
         $scope.$digest();
     }).catch(function(error) {
         alert("return error " + JSON.stringify(error));
+        $scope.showLogin = false;
+        $scope.$digest();
     });
 
         $scope.login = function (username, password) {
