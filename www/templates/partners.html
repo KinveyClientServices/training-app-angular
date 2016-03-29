@@ -1,15 +1,16 @@
 <ion-view>
-    <div class="bar bar-header bar-stable">
-        <h1 class="title">VMWare Partners</h1>
-    </div>
-    <ion-content class="training-content">
+    <ion-nav-title>
+        VMWare Partners
+    </ion-nav-title>
+    <ion-content class="training-content center">
         <button class="button button-positive" ng-click="loadPartners()">Reload data</button>
-        <div class="row" ng-repeat="partner in partners">
-            <div class="col-md-5">
-                <p>
-                    <b>{{ partner.partnername }}</b> {{ partner.partnercompany }}
-                </p>
-            </div>
-        </div>
+
+        <ion-list>
+            <ion-item ng-repeat="partner in partners">
+                <b>{{ partner.partnername }}</b>
+                <br/>
+                {{ partner.partnercompany }}
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>

@@ -1,8 +1,7 @@
-
 <ion-view>
-    <div class="bar bar-header bar-stable">
-        <h1 class="title">Products</h1>
-    </div>
+    <ion-nav-title>
+        Products
+    </ion-nav-title>
     <ion-content class="training-content">
         <div >
         <div class="button-bar">
@@ -15,9 +14,12 @@
 
         <ion-list>
             <ion-item ng-repeat="product in products"
-                      class="item-button-right">
-                <b>{{ product.productname }}</b> {{ product.productdesc }}
-                <button type="button" class="button button-assertive" ng-click="deleteProduct(product, $index)">Delete</button>
+                      class="item-button-right center">
+                <b>{{ product.productname }}</b>
+                <br/>{{ product.productdesc }}
+                <button class="button button-assertive" ng-click="deleteProduct(product, $index)">
+                    <i class="icon ion-trash-b"></i>
+                </button>
             </ion-item>
         </ion-list>
     </ion-content>

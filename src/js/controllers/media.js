@@ -1,17 +1,20 @@
 'use strict';
 
-angular.module('myApp')
+angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", function ($scope, $kinvey, $state) {
 
-    .controller('MediaCtrl', ['$scope', '$kinvey', "$uibModal", function ($scope, $kinvey, $uibModal) {
+        $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+            viewData.enableBack = true;
+        });
+
         $scope.medias = [];
 
         var dataStore = $kinvey.DataStore.getInstance('Media', $kinvey.DataStoreType.Network);
 
         $scope.loadMedia = function () {
-            dataStore.find().then(function(entities) {
+            dataStore.find().then(function (entities) {
                 $scope.medias = entities;
                 $scope.$digest();
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log("err " + JSON.stringify(err));
                 alert("Error: " + err.description);
             });
@@ -20,21 +23,7 @@ angular.module('myApp')
         $scope.loadMedia();
 
         $scope.addMedia = function () {
-            $uibModal.open({
-                animation: true,
-                templateUrl: 'templates/media.html',
-                controller: "MediaEntityCtrl",
-                resolve: {
-                    media: function () {
-                        return {};
-                    }
-                }
-            }).result.then(function (media) {
-                if(media) {
-                    $scope.medias.push(media);
-                    return media;
-                }
-            });
+            $state.go("app.newMedia");
         };
 
         $scope.editMedia = function (media) {
@@ -63,14 +52,19 @@ angular.module('myApp')
 
 
     }])
-    .controller('MediaEntityCtrl', ['$scope', '$kinvey', "$uibModalInstance", function ($scope, $kinvey, $uibModalInstance) {
+    .controller('MediaEntityCtrl', ['$scope', '$kinvey', '$ionicNavBarDelegate', "$state", function ($scope, $kinvey, $ionicNavBarDelegate, $state) {
+
+        $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+            viewData.enableBack = true;
+        });
+
         $scope.media = {};
 
         var dataStore = $kinvey.DataStore.getInstance('Media', $kinvey.DataStoreType.Network);
 
         $scope.saveMedia = function (media) {
             dataStore.save(media).then(function (entity) {
-                $uibModalInstance.close(entity);
+                $state.go('app.media');
             }).catch(function (err) {
                 console.log("error " + JSON.stringify(err));
                 alert("Error: " + err.description);
@@ -78,7 +72,7 @@ angular.module('myApp')
         };
 
         $scope.cancel = function () {
-            $uibModalInstance.close();
+            $ionicNavBarDelegate.back();
         }
 
     }]);
