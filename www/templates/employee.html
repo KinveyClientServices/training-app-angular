@@ -1,13 +1,16 @@
 <ion-view>
-    <div class="bar bar-header bar-stable insert-header">
-        <h1 class="title">Create new employee</h1>
-    </div>
-    <ion-content class="training-content insert-content">
+    <ion-nav-title>
+        Create new employee
+    </ion-nav-title>
+    <ion-nav-buttons side="left">
+    </ion-nav-buttons>
+
+    <ion-content class="training-content center">
         <div>
             <form>
                 <div class="list">
                     <label class="item item-input">
-                        <label class="input-label">Task</label>
+                        <label class="input-label">Name</label>
                         <input type="text" ng-model="employee.name">
                     </label>
                 </div>

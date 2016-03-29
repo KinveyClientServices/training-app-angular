@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('myApp')
+angular.module('myApp').controller('InsertCtrl', ['$scope','$kinvey', function ($scope, $kinvey) {
 
-    .controller('InsertCtrl', ['$scope','$kinvey', function ($scope, $kinvey) {
+        $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+            viewData.enableBack = true;
+        });
 
         var dataStore = $kinvey.DataStore.getInstance('Todo',$kinvey.DataStoreType.Sync);
         $scope.todo = {

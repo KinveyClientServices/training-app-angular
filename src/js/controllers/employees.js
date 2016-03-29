@@ -1,23 +1,27 @@
 'use strict';
 
-angular.module('myApp')
+angular.module('myApp').controller('EmployeesCtrl', ['$scope', '$kinvey', "$state", function ($scope, $kinvey, $state) {
 
-    .controller('EmployeesCtrl', ['$scope', '$kinvey', "$uibModal", function ($scope, $kinvey, $uibModal) {
+
+        $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+            viewData.enableBack = true;
+        });
+
         $scope.employees = [];
 
         var dataStore = $kinvey.DataStore.getInstance('Employees', $kinvey.DataStoreType.Cache);
 
         $scope.loadEmployees = function () {
-            dataStore.find().then(function(result) {
+            dataStore.find().then(function (result) {
                 // The entities fetched from the cache
                 var cache = result.cache;
                 // Return the promise for fetching the entities from the backend
                 return result.networkPromise;
-            }).then(function(entities) {
+            }).then(function (entities) {
                 console.log("employees " + JSON.stringify(entities));
                 $scope.employees = entities;
                 $scope.$digest();
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log("err " + JSON.stringify(err));
                 alert("Error: " + err.description);
             });
@@ -26,24 +30,10 @@ angular.module('myApp')
         $scope.loadEmployees();
 
         $scope.addEmployee = function () {
-            $uibModal.open({
-                animation: true,
-                templateUrl: 'templates/employee.html',
-                controller: "EmployeeCtrl",
-                resolve: {
-                    employee: function () {
-                        return {};
-                    }
-                }
-            }).result.then(function (employee) {
-                if(employee) {
-                    $scope.employees.push(employee);
-                    return employee;
-                }
-            });
+            $state.go("app.newEmployee");
         };
 
-        $scope.pullEmployees = function(){
+        $scope.pullEmployees = function () {
             dataStore.pull().then(function (result) {
                 console.log(JSON.stringify(result));
             }).catch(function (err) {
@@ -52,7 +42,7 @@ angular.module('myApp')
             });
         };
 
-        $scope.pushEmployees = function(){
+        $scope.pushEmployees = function () {
             dataStore.push().then(function (result) {
                 console.log("Push result" + JSON.stringify(result));
             }).catch(function (err) {
@@ -62,23 +52,23 @@ angular.module('myApp')
         };
 
         $scope.syncEmployees = function () {
-            var promise = dataStore.sync().then(function(result) {
+            var promise = dataStore.sync().then(function (result) {
                 console.log("Sync result" + JSON.stringify(result));
                 $scope.loadEmployees();
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log("err " + JSON.stringify(err));
                 alert("Error: " + err.description);
             });
         };
     }])
-    .controller('EmployeeCtrl', ['$scope', '$kinvey', "$uibModalInstance", function ($scope, $kinvey, $uibModalInstance) {
+    .controller('EmployeeCtrl', ['$scope', '$kinvey', '$ionicNavBarDelegate', "$state", function ($scope, $kinvey,$ionicNavBarDelegate, $state) {
         $scope.employee = {};
 
         var dataStore = $kinvey.DataStore.getInstance('Employees', $kinvey.DataStoreType.Cache);
 
         $scope.saveEmployee = function (employee) {
             dataStore.save(employee).then(function (entity) {
-                $uibModalInstance.close(entity);
+                $state.go('app.employees');
             }).catch(function (err) {
                 console.log("error " + JSON.stringify(err));
                 alert("Error: " + err.description);
@@ -86,7 +76,7 @@ angular.module('myApp')
         };
 
         $scope.cancel = function () {
-            $uibModalInstance.close();
+            $ionicNavBarDelegate.back()
         }
 
     }]);

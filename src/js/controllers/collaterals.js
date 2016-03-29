@@ -2,6 +2,11 @@
 
 angular.module('myApp')
     .controller('CollateralsCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
+
+        $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+            viewData.enableBack = true;
+        });
+
         $scope.collaterals = [];
 
         $scope.loadCollaterals = function(){

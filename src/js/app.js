@@ -32,19 +32,26 @@ app.config(['$kinveyProvider', 'kinveyConfig', function ($kinveyProvider, kinvey
     $kinveyProvider.init(kinveyConfig);
 }]);
 
-app.config(function ($stateProvider, $urlRouterProvider) {
-
-    $urlRouterProvider.otherwise("/main/login");
-
+app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
+    $ionicConfigProvider.tabs.position('bottom');
     $stateProvider
-        .state("main", {
-                abstract: true,
-                url: "/main",
-                templateUrl: "templates/main.html",
-                controller: "MainCtrl"
+        .state('app', {
+            url: "/app",
+            abstract: true,
+            templateUrl: "templates/menu.html",
+            controller: 'MenuCtrl'
+        })
+        .state('app.main', {
+            url: "/main",
+            abstract: true,
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/tabs.html",
+                    controller: "MainCtrl"
+                }
             }
-        )
-        .state("main.login", {
+        })
+        .state("app.main.login", {
             url: "/login",
             views: {
                 'auth-tab': {
@@ -53,7 +60,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state("main.products", {
+        .state("app.main.products", {
             url: "/products",
             views: {
                 'products-tab': {
@@ -62,7 +69,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state("main.partners", {
+        .state("app.main.partners", {
             url: "/partners",
             views: {
                 'partners-tab': {
@@ -71,7 +78,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state("main.todos", {
+        .state("app.main.todos", {
             url: "/todos",
             views: {
                 'todo-tab': {
@@ -80,41 +87,63 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state("main.collaterals", {
+        .state("app.collaterals", {
             url: "/collaterals",
             views: {
-                'collateral-tab': {
+                'menuContent': {
                     templateUrl: "templates/collaterals.html",
                     controller: "CollateralsCtrl"
                 }
             }
         })
-        .state("main.insert", {
+        .state("app.insert", {
             url: "/insert",
             views: {
-                'insert-tab': {
+                'menuContent': {
                     templateUrl: "templates/insert.html",
                     controller: "InsertCtrl"
                 }
             }
         })
-        .state("main.employees", {
+        .state("app.employees", {
             url: "/employees",
+            cache:"false",
             views: {
-                'employees-tab': {
+                'menuContent': {
                     templateUrl: "templates/employees.html",
                     controller: "EmployeesCtrl"
                 }
             }
         })
-        .state("main.media", {
+        .state("app.media", {
             url: "/media",
+            cache:"false",
             views: {
-                'media-tab': {
+                'menuContent': {
                     templateUrl: "templates/medias.html",
                     controller: "MediaCtrl"
                 }
             }
+        })
+        .state("app.newMedia", {
+            url: "/newMedia",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/media.html",
+                    controller: "MediaEntityCtrl"
+                }
+            }
+        })
+        .state("app.newEmployee", {
+            url: "/newEmployee",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/employee.html",
+                    controller: "EmployeeCtrl"
+                }
+            }
         });
+
+    $urlRouterProvider.otherwise("/app/main/login");
 });
 

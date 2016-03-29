@@ -1,9 +1,9 @@
 <ion-view>
-    <div class="bar bar-header bar-stable">
-        <h1 class="title" ng-show="showLogin">Login</h1>
-        <h1 class="title" ng-hide="showLogin">Logout</h1>
-    </div>
-    <ion-content class="training-content">
+
+    <ion-nav-title>
+        {{ showLogin == true ? 'Login' : 'Logout' }}
+    </ion-nav-title>
+    <ion-content class="training-content center">
         <div ng-show="showLogin">
             <form ng-submit="login(username, password)">
                 <div class="list">
