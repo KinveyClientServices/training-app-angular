@@ -24,7 +24,11 @@
   ],
   "cordovaPlatforms": [
     "android",
-    "ios"
+    {
+      "platform": "ios",
+      "version": "4.1.0",
+      "locator": "ios@4.1.0"
+    }
   ],
   "scripts": {
     "run-android": "gulp;cordova run android",
