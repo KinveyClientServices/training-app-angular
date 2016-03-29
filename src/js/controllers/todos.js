@@ -19,10 +19,9 @@ angular.module('myApp')
 
         $scope.loadTodos();
 
-        $scope.refreshTodos = function () {
+        $scope.pullTodos = function () {
             dataStore.pull().then(function (result) {
-                $scope.todos = result;
-                $scope.$digest();
+                console.log("todo refresh " + JSON.stringify(result));
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));
                 alert("Error: " + err.description);
@@ -30,8 +29,31 @@ angular.module('myApp')
         };
 
         $scope.syncTodos = function () {
-            dataStore.push().then(function (result) {
+            var promise = dataStore.sync().then(function (result) {
+                console.log("result sync" + JSON.stringify(result));
+                result = result.push;
                 alert('Sync successfully ' + result.success.length + ' entities and failed to sync ' + result.error.length);
+                if(result.error.length != 0){
+                    console.log("sync error " + JSON.stringify(result.error));
+                    var fails = [];
+                    result.error.forEach(function(error){
+                        fails.push({
+                            entityId: error._id,
+                            errorDescription: error.error.description
+                        })
+                    });
+                    alert("Fail reasons: " + JSON.stringify(fails));
+                }
+            }).catch(function (err) {
+                console.log("err " + JSON.stringify(err));
+                alert("Error: " + err.description);
+            });
+        };
+
+        $scope.pushTodos = function () {
+            dataStore.push().then(function (result) {
+                console.log("result push" + JSON.stringify(result));
+                alert('Push successfully ' + result.success.length + ' entities and failed to push ' + result.error.length);
                 if(result.error.length != 0){
                     console.log("sync error " + JSON.stringify(result.error));
                     var fails = [];
@@ -43,7 +65,10 @@ angular.module('myApp')
                     });
                     alert("Fail reasons: " + JSON.stringify(fails));
                 }
-            })
+            }).catch(function (err) {
+                console.log("err " + JSON.stringify(err));
+                alert("Error: " + err.description);
+            });
         };
 
         $scope.editTodo = function (todo) {

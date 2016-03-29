@@ -4,8 +4,10 @@
     </ion-nav-title>
     <ion-content class="training-content">
         <div class="button-bar">
-            <button class="button button-positive" ng-click="refreshTodos()">Refresh data</button>
-            <button class="button button-positive" ng-click="syncTodos()">Sync data</button>
+            <button class="button button-positive" ng-click="pullTodos()">Pull</button>
+            <button class="button button-positive" ng-click="pushTodos()">Push</button>
+            <button class="button button-positive" ng-click="loadTodos()">Find</button>
+            <button class="button button-positive" ng-click="syncTodos()">Sync</button>
         </div>
 
         <ion-list>
