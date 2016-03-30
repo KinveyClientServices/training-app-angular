@@ -2,3 +2,6 @@
 /plugins/
 /node_modules/
 /platforms/
+/www/js/app.js
+/www/css/ionic.app.css
+/www/css/ionic.app.min.css
