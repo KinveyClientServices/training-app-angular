@@ -8,7 +8,7 @@
 
 var initialized = false;
 // Declare app level module which depends on views, and components
-var app = angular.module('myApp', ['ionic','kinvey','ui.bootstrap','ui.router']);
+var app = angular.module('myApp', ['ionic','kinvey','ui.router']);
 
 app.run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {

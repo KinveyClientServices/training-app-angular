@@ -10,8 +10,8 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', function (
         $scope.showLogin = !user;
         $scope.$digest();
     }).catch(function(error) {
-        alert("return error " + JSON.stringify(error));
-        $scope.showLogin = false;
+        alert("login error " + JSON.stringify(error));
+        $scope.showLogin = true;
         $scope.$digest();
     });
 
