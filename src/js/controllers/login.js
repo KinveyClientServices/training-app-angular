@@ -1,4 +1,4 @@
-angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
+angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingUtils', function ($scope, $kinvey, trainingUtils) {
 
     var promise = $kinvey.User.getActiveUser();
     promise.then(function(user) {
@@ -10,12 +10,13 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', function (
         $scope.showLogin = !user;
         $scope.$digest();
     }).catch(function(error) {
-        alert("login error " + JSON.stringify(error));
         $scope.showLogin = true;
         $scope.$digest();
+        trainingUtils.showOkDialog("Error: " + JSON.stringify(error));
     });
 
         $scope.login = function (username, password) {
+            trainingUtils.showProgress();
             var user = new $kinvey.User();
             var promise = user.login(username, password);
             promise.then(function (user) {
@@ -28,9 +29,11 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', function (
                 //);
                 $scope.showLogin = false;
                 $scope.$digest();
+                trainingUtils.hideProgress();
             }, function (err) {
                 console.log("err " + JSON.stringify(err));
-                alert("Error: " + err.description);
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.description);
             });
         };
 
@@ -42,20 +45,23 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', function (
                 $scope.$digest();
             }, function (err) {
                 console.log("mic login error " + JSON.stringify(err));
-                alert("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.description);
             });
         };
 
         $scope.logout = function () {
             $kinvey.User.getActiveUser().then(function (user) {
                 if (user) {
+                    trainingUtils.showProgress();
                     user.logout().then(function () {
                         console.log("logout with success ");
                         $scope.showLogin = true;
                         $scope.$digest();
+                        trainingUtils.hideProgress();
                     }).catch(function (err) {
                         console.log("logout error " + JSON.stringify(err));
-                        alert("Error: " + err.description);
+                        trainingUtils.hideProgress();
+                        trainingUtils.showOkDialog("Error: " + err.description);
                     });
                 }
             })

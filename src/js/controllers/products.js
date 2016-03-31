@@ -2,12 +2,13 @@
 
 angular.module('myApp')
 
-    .controller('ProductsCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
+    .controller('ProductsCtrl', ['$scope', '$kinvey','trainingUtils', function ($scope, $kinvey, trainingUtils) {
         $scope.products = [];
 
         var dataStore = $kinvey.DataStore.getInstance('Products');
 
         $scope.loadProducts = function(query){
+            trainingUtils.showProgress();
             dataStore.find(query).then(function (result) {
                 console.log(JSON.stringify(result));
                 $scope.products = result.cache;
@@ -15,9 +16,11 @@ angular.module('myApp')
             }).then(function (products) {
                 $scope.products = products;
                 $scope.$digest();
+                trainingUtils.hideProgress();
             }).catch(function(err){
                 console.log("err " + JSON.stringify(err));
-                alert("Error: " + err.description);
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.description);
             });
         };
 
@@ -43,12 +46,15 @@ angular.module('myApp')
         };
 
         $scope.deleteProduct = function (product, index) {
+            trainingUtils.showProgress();
             dataStore.removeById(product._id).then(function (res) {
                 $scope.products.splice(index, 1);
                 $scope.$digest();
+                trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("delete with error " + JSON.stringify(err));
-                alert("Error: " + err.description);
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.description);
             });
         }
     }]);

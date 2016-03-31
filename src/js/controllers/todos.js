@@ -1,38 +1,44 @@
 'use strict';
 
-angular.module('myApp')
-
-    .controller('TodoCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
+angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUtils', function ($scope, $kinvey, trainingUtils) {
         $scope.todos = [];
 
         var dataStore = $kinvey.DataStore.getInstance('Todo', $kinvey.DataStoreType.Sync);
 
         $scope.loadTodos = function () {
+            trainingUtils.showProgress();
             dataStore.find().then(function (result) {
                 $scope.todos = result;
                 $scope.$digest();
+                trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));
-                alert("Error: " + err.description);
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.description);
             });
         };
 
         $scope.loadTodos();
 
         $scope.pullTodos = function () {
+            trainingUtils.showProgress();
             dataStore.pull().then(function (result) {
                 console.log("todo refresh " + JSON.stringify(result));
+                trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));
-                alert("Error: " + err.description);
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.description);
             });
         };
 
         $scope.syncTodos = function () {
+            trainingUtils.showProgress();
             var promise = dataStore.sync().then(function (result) {
                 console.log("result sync" + JSON.stringify(result));
                 result = result.push;
-                alert('Sync successfully ' + result.success.length + ' entities and failed to sync ' + result.error.length);
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog('Sync successfully ' + result.success.length + ' entities and failed to sync ' + result.error.length);
                 if(result.error.length != 0){
                     console.log("sync error " + JSON.stringify(result.error));
                     var fails = [];
@@ -42,18 +48,21 @@ angular.module('myApp')
                             errorDescription: error.error.description
                         })
                     });
-                    alert("Fail reasons: " + JSON.stringify(fails));
+                    trainingUtils.showOkDialog("Fail reasons: " + JSON.stringify(fails));
                 }
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));
-                alert("Error: " + err.description);
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.description);
             });
         };
 
         $scope.pushTodos = function () {
+            trainingUtils.showProgress();
             dataStore.push().then(function (result) {
                 console.log("result push" + JSON.stringify(result));
-                alert('Push successfully ' + result.success.length + ' entities and failed to push ' + result.error.length);
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog('Push successfully ' + result.success.length + ' entities and failed to push ' + result.error.length);
                 if(result.error.length != 0){
                     console.log("sync error " + JSON.stringify(result.error));
                     var fails = [];
@@ -63,11 +72,12 @@ angular.module('myApp')
                            errorDescription: error.error.description
                        })
                     });
-                    alert("Fail reasons: " + JSON.stringify(fails));
+                    trainingUtils.showOkDialog("Fail reasons: " + JSON.stringify(fails));
                 }
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));
-                alert("Error: " + err.description);
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.description);
             });
         };
 
@@ -76,22 +86,27 @@ angular.module('myApp')
         };
 
         $scope.updateTodo = function (todo) {
+            trainingUtils.showProgress();
             delete todo.editAction;
             dataStore.save(todo).then(function () {
                 todo.editAction = false;
-            }).catch(function (error) {
-                console.log("error " + JSON.stringify(error));
-                alert("Error: " + error.description);
+                trainingUtils.hideProgress();
+            }).catch(function (err) {
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.description);
             });
         };
 
         $scope.deleteTodo = function (todo, index) {
+            trainingUtils.showProgress();
             dataStore.removeById(todo._id).then(function (res) {
                 $scope.todos.splice(index, 1);
                 $scope.$digest();
+                trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("delete with error " + JSON.stringify(err));
-                alert("Error: " + err.description);
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.description);
             });
         }
 
