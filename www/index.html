@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' *; style-src 'self' 'unsafe-inline' *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *">
     <title></title>
 
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -12,13 +13,14 @@
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-    <script src="lib/kinvey-angular-sdk/dist/kinvey.js"></script>
+    <script src="lib/kinvey-angular-sdk/dist/kinvey.min.js"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
