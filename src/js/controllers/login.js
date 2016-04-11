@@ -1,19 +1,8 @@
 angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingUtils', function ($scope, $kinvey, trainingUtils) {
 
-    var promise = $kinvey.User.getActiveUser();
-    promise.then(function(user) {
-        if (user) {
-            return user.me();
-        }
-        return user;
-    }).then(function(user) {
-        $scope.showLogin = !user;
-        $scope.$digest();
-    }).catch(function(error) {
-        $scope.showLogin = true;
-        $scope.$digest();
-        trainingUtils.showOkDialog("Error: " + JSON.stringify(error));
-    });
+    var user = $kinvey.User.getActiveUser();
+    console.log("active user " + JSON.stringify(user));
+    $scope.showLogin = !user;
 
         $scope.login = function (username, password) {
             trainingUtils.showProgress();
