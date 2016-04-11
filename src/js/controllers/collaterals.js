@@ -10,7 +10,7 @@ angular.module('myApp')
         $scope.collaterals = [];
 
         $scope.loadCollaterals = function(){
-            trainingUtils.showProgress();
+            //trainingUtils.showProgress();
             var query = new $kinvey.Query();
             query.equalTo('mimeType','application/pdf');
             var fileStore = new $kinvey.FileStore(),
