@@ -18,12 +18,14 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
             });
         };
 
-        $scope.loadTodos();
+        $scope.pullTodos();
 
         $scope.pullTodos = function () {
             trainingUtils.showProgress();
             dataStore.pull().then(function (result) {
                 console.log("todo refresh " + JSON.stringify(result));
+                $scope.todos = result;
+                $scope.$digest();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));
@@ -34,9 +36,9 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
 
         $scope.syncTodos = function () {
             trainingUtils.showProgress();
-            var promise = dataStore.sync().then(function (result) {
-                console.log("result sync" + JSON.stringify(result));
-                result = result.push;
+            var promise = dataStore.sync().then(function (syncResult) {
+                console.log("result sync" + JSON.stringify(syncResult));
+                var result = syncResult.push;
                 trainingUtils.hideProgress();
                 trainingUtils.showOkDialog('Sync successfully ' + result.success.length + ' entities and failed to sync ' + result.error.length);
                 if(result.error.length != 0){
@@ -49,6 +51,8 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
                         })
                     });
                     trainingUtils.showOkDialog("Fail reasons: " + JSON.stringify(fails));
+                }else if(syncResult.pull){
+                    $scope.todos = syncResult.pull;
                 }
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));

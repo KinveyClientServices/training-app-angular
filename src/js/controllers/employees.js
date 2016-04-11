@@ -40,6 +40,8 @@ angular.module('myApp').controller('EmployeesCtrl', ['$scope', '$kinvey', "$stat
             trainingUtils.showProgress();
             dataStore.pull().then(function (result) {
                 console.log(JSON.stringify(result));
+                //$scope.employees = result;
+                //$scope.$digest();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));
@@ -51,8 +53,20 @@ angular.module('myApp').controller('EmployeesCtrl', ['$scope', '$kinvey', "$stat
         $scope.pushEmployees = function () {
             trainingUtils.showProgress();
             dataStore.push().then(function (result) {
-                console.log("Push result" + JSON.stringify(result));
+                console.log("result push" + JSON.stringify(result));
                 trainingUtils.hideProgress();
+                trainingUtils.showOkDialog('Push successfully ' + result.success.length + ' entities and failed to push ' + result.error.length);
+                if(result.error.length != 0){
+                    console.log("sync error " + JSON.stringify(result.error));
+                    var fails = [];
+                    result.error.forEach(function(error){
+                        fails.push({
+                            entityId: error._id,
+                            errorDescription: error.error.description
+                        })
+                    });
+                    trainingUtils.showOkDialog("Fail reasons: " + JSON.stringify(fails));
+                }
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));
                 trainingUtils.hideProgress();
@@ -62,9 +76,24 @@ angular.module('myApp').controller('EmployeesCtrl', ['$scope', '$kinvey', "$stat
 
         $scope.syncEmployees = function () {
             trainingUtils.showProgress();
-            dataStore.sync().then(function (result) {
-                console.log("Sync result" + JSON.stringify(result));
-                $scope.loadEmployees();
+            dataStore.sync().then(function (syncResult) {
+                console.log("result sync" + JSON.stringify(syncResult));
+                var result = syncResult.push;
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog('Sync successfully ' + result.success.length + ' entities and failed to sync ' + result.error.length);
+                if(result.error.length != 0){
+                    console.log("sync error " + JSON.stringify(result.error));
+                    var fails = [];
+                    result.error.forEach(function(error){
+                        fails.push({
+                            entityId: error._id,
+                            errorDescription: error.error.description
+                        })
+                    });
+                    trainingUtils.showOkDialog("Fail reasons: " + JSON.stringify(fails));
+                }else if(syncResult.pull){
+                    $scope.employees = syncResult.pull;
+                }
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));
                 trainingUtils.hideProgress();
