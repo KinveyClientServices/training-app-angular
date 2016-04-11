@@ -7,6 +7,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
         $scope.login = function (username, password) {
             trainingUtils.showProgress();
             var user = new $kinvey.User();
+            //TODO: LAB: implement user login
             var promise = user.login(username, password);
             promise.then(function (user) {
                 //var promise = $kinvey.Push.init({
@@ -28,6 +29,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
 
         $scope.micLogin = function () {
             var user = new $kinvey.User();
+            //TODO: LAB: implement MIC login
             var promise = user.loginWithMIC('http://localhost:8000/app/index.html');
             promise.then(function (user) {
                 $scope.showLogin = false;
@@ -42,6 +44,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
         var user = $kinvey.User.getActiveUser();
         if (user) {
             trainingUtils.showProgress();
+            //TODO: LAB:implement logout
             user.logout().then(function () {
                 console.log("logout with success ");
                 $scope.showLogin = true;

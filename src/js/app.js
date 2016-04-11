@@ -21,6 +21,7 @@ app.run(function ($ionicPlatform) {
     });
 });
 
+//TODO: LAB: configure Kinvey
 app.constant('kinveyConfig', {
     apiHostName: 'https://baas.kinvey.com',
     micHostName: 'https://auth.kinvey.com',
@@ -28,6 +29,7 @@ app.constant('kinveyConfig', {
     appSecret: '18e581bc9c7046a5b1b20ae838105126'
 });
 
+//TODO: LAB: initialize Kinvey
 app.config(['$kinveyProvider', 'kinveyConfig', function ($kinveyProvider, kinveyConfig) {
     $kinveyProvider.init(kinveyConfig);
 }]);

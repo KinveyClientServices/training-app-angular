@@ -3,6 +3,7 @@
 angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUtils', function ($scope, $kinvey, trainingUtils) {
         $scope.todos = [];
 
+        //TODO: LAB: create sync data store
         var dataStore = $kinvey.DataStore.getInstance('Todo', $kinvey.DataStoreType.Sync);
 
         $scope.loadTodos = function () {
@@ -32,6 +33,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
         });
     };
 
+        //TODO: LAB: pull data
         $scope.pullTodos();
 
         $scope.syncTodos = function () {
@@ -61,6 +63,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
             });
         };
 
+        //TODO: LAB: push data
         $scope.pushTodos = function () {
             trainingUtils.showProgress();
             dataStore.push().then(function (result) {
@@ -89,6 +92,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
             todo.editAction = true;
         };
 
+        //TODO: LAB: update data
         $scope.updateTodo = function (todo) {
             trainingUtils.showProgress();
             delete todo.editAction;
@@ -101,6 +105,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
             });
         };
 
+        //TODO: LAB: delete todo
         $scope.deleteTodo = function (todo, index) {
             trainingUtils.showProgress();
             dataStore.removeById(todo._id).then(function (res) {

@@ -5,3 +5,8 @@
 /www/js/app.js
 /www/css/ionic.app.css
 /www/css/ionic.app.min.css
+/app/bower_components/
+npm-debug.log
+www/lib/
+/resources/android/
+/resources/ios/
