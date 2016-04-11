@@ -38,21 +38,20 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
             });
         };
 
-        $scope.logout = function () {
-            $kinvey.User.getActiveUser().then(function (user) {
-                if (user) {
-                    trainingUtils.showProgress();
-                    user.logout().then(function () {
-                        console.log("logout with success ");
-                        $scope.showLogin = true;
-                        $scope.$digest();
-                        trainingUtils.hideProgress();
-                    }).catch(function (err) {
-                        console.log("logout error " + JSON.stringify(err));
-                        trainingUtils.hideProgress();
-                        trainingUtils.showOkDialog("Error: " + err.description);
-                    });
-                }
-            })
+    $scope.logout = function () {
+        var user = $kinvey.User.getActiveUser();
+        if (user) {
+            trainingUtils.showProgress();
+            user.logout().then(function () {
+                console.log("logout with success ");
+                $scope.showLogin = true;
+                $scope.$digest();
+                trainingUtils.hideProgress();
+            }).catch(function (err) {
+                console.log("logout error " + JSON.stringify(err));
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.description);
+            });
         }
+    }
     }]);
