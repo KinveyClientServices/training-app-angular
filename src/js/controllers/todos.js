@@ -18,21 +18,21 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
             });
         };
 
-        $scope.pullTodos();
+    $scope.pullTodos = function () {
+        trainingUtils.showProgress();
+        dataStore.pull().then(function (result) {
+            console.log("todo refresh " + JSON.stringify(result));
+            $scope.todos = result;
+            $scope.$digest();
+            trainingUtils.hideProgress();
+        }).catch(function (err) {
+            console.log("err " + JSON.stringify(err));
+            trainingUtils.hideProgress();
+            trainingUtils.showOkDialog("Error: " + err.description);
+        });
+    };
 
-        $scope.pullTodos = function () {
-            trainingUtils.showProgress();
-            dataStore.pull().then(function (result) {
-                console.log("todo refresh " + JSON.stringify(result));
-                $scope.todos = result;
-                $scope.$digest();
-                trainingUtils.hideProgress();
-            }).catch(function (err) {
-                console.log("err " + JSON.stringify(err));
-                trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
-            });
-        };
+        $scope.pullTodos();
 
         $scope.syncTodos = function () {
             trainingUtils.showProgress();
