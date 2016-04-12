@@ -8,6 +8,7 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
 
         $scope.medias = [];
 
+        //TODO: LAB: Create a Network Data Store
         var dataStore = $kinvey.DataStore.getInstance('Media', $kinvey.DataStoreType.Network);
 
         $scope.loadMedia = function () {
@@ -33,6 +34,7 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
             media.editAction = true;
         };
 
+        //TODO: LAB: Update Media
         $scope.updateMedia = function (media) {
             delete media.editAction;
             trainingUtils.showProgress();
@@ -46,6 +48,7 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
             });
         };
 
+        //TODO: LAB: Delete Media
         $scope.deleteMedia = function (media, index) {
             trainingUtils.showProgress();
             dataStore.removeById(media._id).then(function (res) {

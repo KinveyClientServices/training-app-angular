@@ -23,7 +23,7 @@ angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $stat
             "click": collateralsClick
         },
         {
-            "title": "Insert",
+            "title": "Create Todo",
             "click": insertClick
         },
         {

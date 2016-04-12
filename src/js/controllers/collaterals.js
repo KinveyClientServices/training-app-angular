@@ -9,6 +9,7 @@ angular.module('myApp')
 
         $scope.collaterals = [];
 
+        //TODO: LAB: Get files from Kinvey
         $scope.loadCollaterals = function(){
             trainingUtils.showProgress();
             var query = new $kinvey.Query();

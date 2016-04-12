@@ -30,7 +30,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
         $scope.micLogin = function () {
             var user = new $kinvey.User();
             //TODO: LAB: implement MIC login
-            var promise = user.loginWithMIC('http://localhost:8000/app/index.html');
+            var promise = user.loginWithMIC('training://');
             promise.then(function (user) {
                 $scope.showLogin = false;
                 $scope.$digest();

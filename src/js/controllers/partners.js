@@ -7,6 +7,7 @@ angular.module('myApp')
 
         var dataStore = $kinvey.DataStore.getInstance('Partner');
 
+        //TODO: LAB: Get all Partners by query
         $scope.loadPartners = function(query){
             trainingUtils.showProgress();
             dataStore.find().then(function (result) {

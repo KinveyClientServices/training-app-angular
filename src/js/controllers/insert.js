@@ -7,12 +7,15 @@ angular.module('myApp').controller('InsertCtrl', ['$scope', '$kinvey','trainingU
         });
 
         var dataStore = $kinvey.DataStore.getInstance('Todo',$kinvey.DataStoreType.Sync);
+
+        //TODO: LAB: Define Todo JSON
         $scope.todo = {
             action: "",
             duedate: new Date(),
             completed:false
         };
 
+        //TODO: LAB: Create a Todo
         $scope.insert = function (todo) {
             trainingUtils.showProgress();
             dataStore.save(todo).then(function (entity) {

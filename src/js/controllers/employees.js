@@ -2,7 +2,6 @@
 
 angular.module('myApp').controller('EmployeesCtrl', ['$scope', '$kinvey', "$state",'trainingUtils', function ($scope, $kinvey, $state, trainingUtils) {
 
-
         $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
             viewData.enableBack = true;
         });
@@ -36,6 +35,7 @@ angular.module('myApp').controller('EmployeesCtrl', ['$scope', '$kinvey', "$stat
             $state.go("app.newEmployee");
         };
 
+        //TODO: LAB: Cache data from Kinvey locally
         $scope.pullEmployees = function () {
             trainingUtils.showProgress();
             dataStore.pull().then(function (result) {
@@ -50,6 +50,7 @@ angular.module('myApp').controller('EmployeesCtrl', ['$scope', '$kinvey', "$stat
             });
         };
 
+        //TODO: LAB: Push cached changes to Kinvey
         $scope.pushEmployees = function () {
             trainingUtils.showProgress();
             dataStore.push().then(function (result) {
@@ -74,6 +75,7 @@ angular.module('myApp').controller('EmployeesCtrl', ['$scope', '$kinvey', "$stat
             });
         };
 
+        //TODO: LAB: sync cached changes and get new updates
         $scope.syncEmployees = function () {
             trainingUtils.showProgress();
             dataStore.sync().then(function (syncResult) {

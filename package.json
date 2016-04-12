@@ -31,8 +31,10 @@
     }
   ],
   "scripts": {
+    "emulate-android": "gulp;cordova emulate android",
+    "emulate-ios": "gulp;cordova emulate ios",
     "run-android": "gulp;cordova run android",
-    "run-ios": "gulp;cordova emulate ios",
+    "run-ios": "gulp;cordova run ios",
     "install":"ionic state reset; bower install"
   }
 }
