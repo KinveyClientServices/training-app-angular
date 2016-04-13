@@ -13,7 +13,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                 return result.networkPromise;
             }).then(function (partners) {
                 $scope.partners = partners;
-                $scope.$digest();
+                $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function(err){
                 console.log("err " + JSON.stringify(err));
@@ -35,7 +35,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             dataStore.pull().then(function (result) {
                 console.log(JSON.stringify(result));
                 //$scope.partners = result;
-                //$scope.$digest();
+                //$scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));

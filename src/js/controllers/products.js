@@ -18,7 +18,7 @@ angular.module('myApp')
                 return result.networkPromise;
             }).then(function (products) {
                 $scope.products = products;
-                $scope.$digest();
+                $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function(err){
                 console.log("err " + JSON.stringify(err));
@@ -56,7 +56,7 @@ angular.module('myApp')
             trainingUtils.showProgress();
             dataStore.removeById(product._id).then(function (res) {
                 $scope.products.splice(index, 1);
-                $scope.$digest();
+                $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("delete with error " + JSON.stringify(err));

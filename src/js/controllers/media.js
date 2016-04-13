@@ -15,7 +15,7 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
             trainingUtils.showProgress();
             dataStore.find().then(function (entities) {
                 $scope.medias = entities;
-                $scope.$digest();
+                $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));
@@ -53,7 +53,7 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
             trainingUtils.showProgress();
             dataStore.removeById(media._id).then(function (res) {
                 $scope.medias.splice(index, 1);
-                $scope.$digest();
+                $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("delete with error " + JSON.stringify(err));

@@ -12,7 +12,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
         trainingUtils.showProgress();
         dataStore.find().then(function (result) {
             $scope.todos = result;
-            $scope.$digest();
+            $scope.$apply();
             trainingUtils.hideProgress();
         }).catch(function (err) {
             console.log("err " + JSON.stringify(err));
@@ -27,7 +27,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
         dataStore.pull().then(function (result) {
             console.log("todo refresh " + JSON.stringify(result));
             $scope.todos = result;
-            $scope.$digest();
+            $scope.$apply();
             trainingUtils.hideProgress();
         }).catch(function (err) {
             console.log("err " + JSON.stringify(err));
@@ -113,7 +113,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
         trainingUtils.showProgress();
         dataStore.removeById(todo._id).then(function (res) {
             $scope.todos.splice(index, 1);
-            $scope.$digest();
+            $scope.$apply();
             trainingUtils.hideProgress();
         }).catch(function (err) {
             console.log("delete with error " + JSON.stringify(err));

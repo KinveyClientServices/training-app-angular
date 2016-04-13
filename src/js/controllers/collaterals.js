@@ -14,7 +14,7 @@ angular.module('myApp')
             var promise = fileStore.find();
             promise.then(function(files) {
                 $scope.collaterals = files;
-                $scope.$digest();
+                $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function(err) {
                 console.log("fetch collaterals error " + JSON.stringify(err));
