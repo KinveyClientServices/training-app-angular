@@ -10,13 +10,20 @@ var initialized = false;
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', ['ionic','kinvey','ui.router']);
 
-app.run(function ($ionicPlatform) {
+app.run(function ($ionicPlatform, $state, $kinvey) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             cordova.plugins.Keyboard.disableScroll(true);
+        }
+        var user = $kinvey.User.getActiveUser();
+        console.log("active user" + JSON.stringify(user));
+        if(user){
+            $state.go("app.main.products");
+        }else{
+            $state.go("app.login");
         }
     });
 });
@@ -53,10 +60,10 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
                 }
             }
         })
-        .state("app.main.login", {
+        .state("app.login", {
             url: "/login",
             views: {
-                'auth-tab': {
+                'menuContent': {
                     templateUrl: "templates/login.html",
                     controller: "LoginCtrl"
                 }
@@ -144,8 +151,17 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
                     controller: "EmployeeCtrl"
                 }
             }
+        })
+        .state("app.logout", {
+            url: "/logout",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/logout.html",
+                    controller: "LogoutCtrl"
+                }
+            }
         });
 
-    $urlRouterProvider.otherwise("/app/main/login");
+    //$urlRouterProvider.otherwise("/app/login");
 });
 

@@ -1,21 +1,23 @@
-<ion-view>
+<ion-view can-swipe-back="false">
 
     <ion-nav-title>
-        {{ showLogin == true ? 'Login' : 'Logout' }}
+        Login
     </ion-nav-title>
+    <ion-nav-buttons side="left">
+    </ion-nav-buttons>
     <ion-content class="training-content center">
-        <div ng-show="showLogin">
-            <form ng-submit="login(username, password)">
+        <div>
+            <form ng-submit="login(form.username, form.password)">
                 <div class="list">
 
                     <label class="item item-input">
                         <span class="input-label">Username</span>
-                        <input type="text"  ng-model="username" required>
+                        <input type="text"  ng-model="form.username" required>
                     </label>
 
                     <label class="item item-input">
                         <span class="input-label">Password</span>
-                        <input type="password" name="password" id="password" ng-model="password" required>
+                        <input type="password" name="password" id="password" ng-model="form.password" required>
                     </label>
                 </div>
                 <button class="button button-positive" type="submit">Login</button>
@@ -23,9 +25,6 @@
 
             <p>Or</p>
             <button class="button button-positive" ng-click="micLogin()">Login with MIC</button>
-        </div>
-        <div ng-hide="showLogin">
-            <button class="button button-positive" ng-click="logout()">Logout</button>
         </div>
     </ion-content>
 </ion-view>

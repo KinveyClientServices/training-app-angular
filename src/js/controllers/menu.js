@@ -16,6 +16,9 @@ angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $stat
         $state.go("app.employees");
     };
 
+    var logoutClick = function () {
+        $state.go("app.logout");
+    };
 
     $scope.leftMenuItems = [
         {
@@ -33,6 +36,10 @@ angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $stat
         {
             "title": "Media",
             "click": mediaClick
+        },
+        {
+            "title": "Logout",
+            "click": logoutClick
         }
     ];
 
