@@ -12,10 +12,6 @@ angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $stat
         $state.go("app.media")
     };
 
-    var employeesClick = function () {
-        $state.go("app.employees");
-    };
-
     var logoutClick = function () {
         $state.go("app.logout");
     };
@@ -28,10 +24,6 @@ angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $stat
         {
             "title": "Create Todo",
             "click": insertClick
-        },
-        {
-            "title": "Employees",
-            "click": employeesClick
         },
         {
             "title": "Media",

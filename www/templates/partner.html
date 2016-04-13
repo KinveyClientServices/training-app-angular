@@ -1,6 +1,6 @@
 <ion-view>
     <ion-nav-title>
-        Create new employee
+        Create new partner
     </ion-nav-title>
     <ion-nav-buttons side="left">
     </ion-nav-buttons>
@@ -11,13 +11,17 @@
                 <div class="list">
                     <label class="item item-input">
                         <label class="input-label">Name</label>
-                        <input type="text" ng-model="employee.name">
+                        <input type="text" ng-model="partner.partnername">
+                    </label>
+                    <label class="item item-input">
+                        <label class="input-label">Company</label>
+                        <input type="text" ng-model="partner.partnercompany">
                     </label>
                 </div>
             </form>
         </div>
         <div>
-            <button class="button button-positive" type="button" ng-click="saveEmployee(employee)">Save</button>
+            <button class="button button-positive" type="button" ng-click="savePartner(partner)">Save</button>
             <button class="button button-assertive" type="button" ng-click="cancel()">Cancel</button>
         </div>
 

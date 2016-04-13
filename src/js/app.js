@@ -114,16 +114,6 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
                 }
             }
         })
-        .state("app.employees", {
-            url: "/employees",
-            cache:"false",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/employees.html",
-                    controller: "EmployeesCtrl"
-                }
-            }
-        })
         .state("app.media", {
             url: "/media",
             cache:"false",
@@ -143,12 +133,12 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
                 }
             }
         })
-        .state("app.newEmployee", {
-            url: "/newEmployee",
+        .state("app.newPartner", {
+            url: "/newPartner",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/employee.html",
-                    controller: "EmployeeCtrl"
+                    templateUrl: "templates/partner.html",
+                    controller: "PartnerCtrl"
                 }
             }
         })

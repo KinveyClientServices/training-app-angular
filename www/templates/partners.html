@@ -3,7 +3,13 @@
         VMWare Partners
     </ion-nav-title>
     <ion-content class="training-content center">
-        <button class="button button-positive" ng-click="loadPartners()">Reload data</button>
+        <div class="button-bar">
+            <button class="button button-positive" ng-click="addPartner()">Add</button>
+            <button class="button button-positive" ng-click="loadPartners()">Find</button>
+            <button class="button button-positive" ng-click="pullPartners()">Pull</button>
+            <button class="button button-positive" ng-click="syncPartners()">Sync</button>
+            <button class="button button-positive" ng-click="pushPartners()">Push</button>
+        </div>
 
         <ion-list>
             <ion-item ng-repeat="partner in partners">
