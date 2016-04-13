@@ -36,8 +36,11 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
     $scope.micLogin = function () {
         var user = new $kinvey.User();
         //TODO: LAB: implement MIC login
-        var promise = user.loginWithMIC('training://');
+        var promise = user.loginWithMIC('http://localhost:8100');
         promise.then(function (user) {
+          trainingUtils.hideProgress();
+          $scope.form = {};
+          $state.go("app.main.products");
         }, function (err) {
             console.log("mic login error " + JSON.stringify(err));
             trainingUtils.showOkDialog("Error: " + err.description);
