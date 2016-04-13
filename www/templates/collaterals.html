@@ -10,7 +10,7 @@
             <ion-item ng-repeat="collateral in collaterals"
                       class="item-button-right">
                 <b>{{ collateral._filename }}</b>
-                <a href="{{ collateral._downloadURL }}" target="_blank">View file</a>
+                <button  class="button button-positive" ng-click="openPdfFile(collateral._downloadURL)">View file</button>
             </ion-item>
         </ion-list>
     </ion-content>

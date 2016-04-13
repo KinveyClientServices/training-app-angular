@@ -27,6 +27,10 @@ angular.module('myApp')
             });
         };
 
+        $scope.openPdfFile = function(url){
+            window.open(url, '_system', 'location=yes'); return false;
+        };
+
         $scope.loadCollaterals();
 
     }]);
