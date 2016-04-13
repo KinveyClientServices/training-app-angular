@@ -3,10 +3,6 @@
 angular.module('myApp')
     .controller('CollateralsCtrl', ['$scope', '$kinvey','trainingUtils', function ($scope, $kinvey, trainingUtils) {
 
-        $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
-            viewData.enableBack = true;
-        });
-
         $scope.collaterals = [];
 
         //TODO: LAB: Get files from Kinvey

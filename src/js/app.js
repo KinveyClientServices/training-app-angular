@@ -96,10 +96,10 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
                 }
             }
         })
-        .state("app.collaterals", {
+        .state("app.main.collaterals", {
             url: "/collaterals",
             views: {
-                'menuContent': {
+                'col-tab': {
                     templateUrl: "templates/collaterals.html",
                     controller: "CollateralsCtrl"
                 }

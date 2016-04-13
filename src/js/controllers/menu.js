@@ -1,9 +1,5 @@
 angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $state) {
 
-    var collateralsClick = function () {
-        $state.go("app.collaterals");
-    };
-
     var insertClick = function () {
         $state.go("app.insert");
     };
@@ -17,10 +13,6 @@ angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $stat
     };
 
     $scope.leftMenuItems = [
-        {
-            "title": "Collateral",
-            "click": collateralsClick
-        },
         {
             "title": "Create Todo",
             "click": insertClick
