@@ -3,6 +3,9 @@
 angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUtils', function ($scope, $kinvey, trainingUtils) {
 
     $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.search = {
+            action: ""
+        };
         $scope.loadTodos();
     });
 
@@ -13,9 +16,12 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
 
     //TODO: LAB: get all Todos
     //$scope.todos
-    $scope.loadTodos = function () {
+    $scope.loadTodos = function (searchAction) {
         trainingUtils.showProgress();
-        dataStore.find().then(function (result) {
+        var query = new $kinvey.Query();
+        searchAction = searchAction ? searchAction : "";
+        query.matches("action","^" + searchAction);
+        dataStore.find(query).then(function (result) {
             $scope.todos = result;
             $scope.$apply();
             trainingUtils.hideProgress();
