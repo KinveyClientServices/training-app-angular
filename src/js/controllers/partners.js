@@ -50,7 +50,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             dataStore.push().then(function (result) {
                 console.log("result push" + JSON.stringify(result));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog('Push successfully ' + result.success.length + ' entities and failed to push ' + result.error.length);
+                trainingUtils.showOkDialog('Failed to push ' + result.error.length + " entities");
                 if(result.error.length != 0){
                     console.log("sync error " + JSON.stringify(result.error));
                     var fails = [];
@@ -76,7 +76,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                 console.log("result sync" + JSON.stringify(syncResult));
                 var result = syncResult.push;
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog('Sync successfully ' + result.success.length + ' entities and failed to sync ' + result.error.length);
+                trainingUtils.showOkDialog('Failed to sync ' + result.error.length + ' entities');
                 if(result.error.length != 0){
                     console.log("sync error " + JSON.stringify(result.error));
                     var fails = [];
