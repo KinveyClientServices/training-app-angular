@@ -1,14 +1,26 @@
 'use strict';
 
 angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','trainingUtils', '$state', function ($scope, $kinvey, trainingUtils, $state) {
+
+        $scope.$on('$ionicView.beforeEnter', function () {
+            $scope.search = {
+                name: ""
+            };
+            $scope.loadTodos();
+        });
+
         $scope.partners = [];
 
         var dataStore = $kinvey.DataStore.getInstance('Partner', $kinvey.DataStoreType.Cache);
 
         //TODO: LAB: Get all Partners by query
-        $scope.loadPartners = function(query){
+        $scope.loadPartners = function(searchName){
             trainingUtils.showProgress();
+            var query = new $kinvey.Query();
+            searchName = searchName ? searchName : "";
+            query.matches("partnername","^" + searchName);
             dataStore.find().then(function (result) {
+            //dataStore.find(query).then(function (result) {
                 $scope.partners = result.cache;
                 return result.networkPromise;
             }).then(function (partners) {
