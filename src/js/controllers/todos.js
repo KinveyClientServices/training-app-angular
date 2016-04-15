@@ -56,7 +56,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
             console.log("result sync" + JSON.stringify(syncResult));
             var result = syncResult.push;
             trainingUtils.hideProgress();
-            trainingUtils.showOkDialog('Failed to sync ' + result.error.length + " entities");
+            trainingUtils.showOkDialog('Sync Completed: ' + result.error.length + "entities failed to sync");
             if(result.error.length != 0){
                 console.log("sync error " + JSON.stringify(result.error));
                 var fails = [];
@@ -66,7 +66,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
                         errorDescription: error.error.description
                     })
                 });
-                trainingUtils.showOkDialog("Fail reasons: " + JSON.stringify(fails));
+                trainingUtils.showOkDialog("Sync Failure: " + JSON.stringify(fails));
             }else if(syncResult.pull){
                 $scope.todos = syncResult.pull;
             }
@@ -83,7 +83,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
         dataStore.push().then(function (result) {
             console.log("result push" + JSON.stringify(result));
             trainingUtils.hideProgress();
-            trainingUtils.showOkDialog('Failed to push ' + result.error.length + " entities");
+            trainingUtils.showOkDialog('Push completed: ' + result.success.length + ' entities succeeded and ' + result.error.length + 'entities failed');
             if(result.error.length != 0){
                 console.log("sync error " + JSON.stringify(result.error));
                 var fails = [];
@@ -93,7 +93,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
                        errorDescription: error.error.description
                    })
                 });
-                trainingUtils.showOkDialog("Fail reasons: " + JSON.stringify(fails));
+                trainingUtils.showOkDialog("Push Failure: " + JSON.stringify(fails));
             }
         }).catch(function (err) {
             console.log("err " + JSON.stringify(err));
