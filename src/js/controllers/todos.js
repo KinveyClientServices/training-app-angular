@@ -1,6 +1,11 @@
 'use strict';
 
 angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUtils', function ($scope, $kinvey, trainingUtils) {
+
+    $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.loadTodos();
+    });
+
     $scope.todos = [];
 
     //TODO: LAB: create sync data store
