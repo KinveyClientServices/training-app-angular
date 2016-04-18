@@ -19,8 +19,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             var query = new $kinvey.Query();
             searchName = searchName ? searchName : "";
             query.matches("partnername","^" + searchName);
-            dataStore.find().then(function (result) {
-            //dataStore.find(query).then(function (result) {
+            dataStore.find(query).then(function (result) {
                 $scope.partners = result.cache;
                 return result.networkPromise;
             }).then(function (partners) {
