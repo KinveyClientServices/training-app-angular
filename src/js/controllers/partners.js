@@ -6,7 +6,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             $scope.search = {
                 name: ""
             };
-            $scope.loadTodos();
+            $scope.loadPartners();
         });
 
         $scope.partners = [];
@@ -44,9 +44,8 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
         $scope.pullPartners = function () {
             trainingUtils.showProgress();
             dataStore.pull().then(function (result) {
-                console.log(JSON.stringify(result));
-                //$scope.partners = result;
-                //$scope.$apply();
+                $scope.partners = result;
+                $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err));

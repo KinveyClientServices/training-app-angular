@@ -16,13 +16,22 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
         //TODO: LAB: implement user login
         var promise = user.login(username, password);
         promise.then(function (user) {
-            //var promise = $kinvey.Push.init({
-            //}).then(function(response) {
-            //    console.log("register push " + JSON.stringify(response));
-            //}).catch(function(error) {
-            //        console.log("register push error " + JSON.stringify(error));
-            //    }
-            //);
+            var promise = $kinvey.Push.register({
+              android: {
+                senderID: '856811466642'
+              },
+              ios: {
+                alert: true,
+                badge: true,
+                sound: true
+              }
+            }).then(function(response) {
+                console.log("register push " + JSON.stringify(response));
+            }).catch(function(error) {
+                console.log("register push error " + JSON.stringify(error));
+              }
+            );
+
             trainingUtils.hideProgress();
             $scope.form = {};
             $state.go("app.main.products");

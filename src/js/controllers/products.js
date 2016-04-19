@@ -5,6 +5,10 @@ angular.module('myApp')
     .controller('ProductsCtrl', ['$scope', '$kinvey','trainingUtils', function ($scope, $kinvey, trainingUtils) {
         $scope.products = [];
 
+//        $kinvey.Push.onNotification(function(data) {
+//          console.log(data);
+//        });
+
         //TODO: LAB: Create a default data store. SDK defaults to Cache Store
         var dataStore = $kinvey.DataStore.getInstance('Products');
 
