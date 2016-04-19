@@ -14,9 +14,9 @@ angular.module('myApp').controller('LogoutCtrl', ['$scope', '$kinvey', 'training
                 trainingUtils.hideProgress();
                 $state.go("app.login");
             }).catch(function (err) {
-                console.log("logout error " + JSON.stringify(err));
+                console.log("logout error " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         }
     }

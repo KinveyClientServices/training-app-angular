@@ -27,9 +27,9 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                 $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function(err){
-                console.log("err " + JSON.stringify(err));
+                console.log("err " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         };
         $scope.loadPartners();
@@ -48,9 +48,9 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                 $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
-                console.log("err " + JSON.stringify(err));
+                console.log("err " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         };
 
@@ -60,9 +60,9 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             dataStore.push().then(function (result) {
                 console.log("result push" + JSON.stringify(result));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog('Push completed: ' + result.success.length + ' entities succeeded and ' + result.error.length + 'entities failed');
-                if(result.error.length != 0){
-                    console.log("sync error " + JSON.stringify(result.error));
+                if(result.error && result.error.length != 0){
+                    trainingUtils.showOkDialog('Push completed: ' + result.success.length + ' entities succeeded and ' + result.error.length + 'entities failed');
+                    console.log("push error " + JSON.stringify(result.error));
                     var fails = [];
                     result.error.forEach(function(error){
                         fails.push({
@@ -71,11 +71,14 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                         })
                     });
                     trainingUtils.showOkDialog("Push Failure: " + JSON.stringify(fails));
+                } else {
+                  var pushCount = result.success ? result.success.length : 0;
+                  trainingUtils.showOkDialog('Push completed: ' + pushCount + ' entities pushed');
                 }
             }).catch(function (err) {
-                console.log("err " + JSON.stringify(err));
+                console.log("err " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         };
 
@@ -86,8 +89,8 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                 console.log("result sync" + JSON.stringify(syncResult));
                 var result = syncResult.push;
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog('Sync Completed: ' + result.error.length + 'entities failed to sync');
-                if(result.error.length != 0){
+                if(result.error && result.error.length != 0){
+                  trainingUtils.showOkDialog('Sync Completed: ' + result.error.length + 'entities failed to sync');
                     console.log("sync error " + JSON.stringify(result.error));
                     var fails = [];
                     result.error.forEach(function(error){
@@ -98,12 +101,13 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                     });
                     trainingUtils.showOkDialog("Sync Failure: " + JSON.stringify(fails));
                 }else if(syncResult.pull){
+                    trainingUtils.showOkDialog('Sync Completed');
                     $scope.partners = syncResult.pull;
                 }
             }).catch(function (err) {
-                console.log("err " + JSON.stringify(err));
+                console.log("err " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         };
     }])
@@ -120,9 +124,9 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                 trainingUtils.hideProgress();
                 $state.go('app.main.partners');
             }).catch(function (err) {
-                console.log("error " + JSON.stringify(err));
+                console.log("error " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         };
 

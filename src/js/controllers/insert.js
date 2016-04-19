@@ -23,9 +23,9 @@ angular.module('myApp').controller('InsertCtrl', ['$scope', '$kinvey','trainingU
                 trainingUtils.showOkDialog("Todo was added with success");
                 //$state.go('todos');
             }).catch(function (err) {
-                console.log("error " + JSON.stringify(err));
+                console.log("error " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         }
     }]);

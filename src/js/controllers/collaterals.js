@@ -17,9 +17,9 @@ angular.module('myApp')
                 $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function(err) {
-                console.log("fetch collaterals error " + JSON.stringify(err));
+                console.log("fetch collaterals error " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         };
 

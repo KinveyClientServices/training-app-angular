@@ -36,9 +36,9 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
             $scope.form = {};
             $state.go("app.main.products");
         }, function (err) {
-            console.log("err " + JSON.stringify(err));
+            console.log("err " + JSON.stringify(err.message));
             trainingUtils.hideProgress();
-            trainingUtils.showOkDialog("Error: " + err.description);
+            trainingUtils.showOkDialog("Error: " + err.message);
         });
     };
 
@@ -51,8 +51,8 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
           $scope.form = {};
           $state.go("app.main.products");
         }, function (err) {
-            console.log("mic login error " + JSON.stringify(err));
-            trainingUtils.showOkDialog("Error: " + err.description);
+            console.log("mic login error " + JSON.stringify(err.message));
+            trainingUtils.showOkDialog("Error: " + err.message);
         });
     };
 

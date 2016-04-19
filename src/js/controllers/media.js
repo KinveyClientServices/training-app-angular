@@ -18,9 +18,9 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
                 $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
-                console.log("err " + JSON.stringify(err));
+                console.log("err " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         };
 
@@ -42,9 +42,9 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
                 media.editAction = false;
                 trainingUtils.hideProgress();
             }).catch(function (err) {
-                console.log("error " + JSON.stringify(err));
+                console.log("error " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         };
 
@@ -56,9 +56,9 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
                 $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
-                console.log("delete with error " + JSON.stringify(err));
+                console.log("delete with error " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         }
 
@@ -80,9 +80,9 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
                 trainingUtils.hideProgress();
                 $state.go('app.media');
             }).catch(function (err) {
-                console.log("error " + JSON.stringify(err));
+                console.log("error " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.description);
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         };
 
