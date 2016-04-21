@@ -29,7 +29,15 @@
         "APP_ID": "265471787126357",
         "APP_NAME": "com.kinvey.training"
       }
+    },
+    {
+      "id": "phonegap-plugin-push",
+      "locator": "phonegap-plugin-push",
+      "variables": {
+        "SENDER_ID": "856811466642"
+      }
     }
+
   ],
   "cordovaPlatforms": [
     "android",
