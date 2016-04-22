@@ -36,8 +36,9 @@
       "variables": {
         "SENDER_ID": "856811466642"
       }
-    }
-
+    },
+    "cordova-plugin-dialogs",
+    "cordova-plugin-vibration"
   ],
   "cordovaPlatforms": [
     "android",
