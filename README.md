@@ -2,6 +2,20 @@
 
 A sample Angular/Ionic app which demonstrates the basic functionality of the Kinvey SDK
 
+### Preinstall
+* make sure that you have nodejs installed https://nodejs.org/en/
+* install cordova
+  npm install -g cordova
+* install ionic
+  npm install -g ionic
+* install bower
+  npm install -g bower 
+* install ios-sim to emulate app on iOS
+  npm install -g ios-sim
+  
+Users that have Mac or Linux machines should run above commands with sudo
+
+
 ### Getting Started
 * npm install
 * npm emulate run-android
