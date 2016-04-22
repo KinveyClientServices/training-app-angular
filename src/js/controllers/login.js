@@ -16,22 +16,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
         //TODO: LAB: implement user login
         var promise = user.login(username, password);
         promise.then(function (user) {
-            var promise = $kinvey.Push.register({
-              android: {
-                senderID: '856811466642'
-              },
-              ios: {
-                alert: true,
-                badge: true,
-                sound: true
-              }
-            }).then(function(response) {
-                console.log("register push " + JSON.stringify(response));
-            }).catch(function(error) {
-                console.log("register push error " + JSON.stringify(error));
-              }
-            );
-
+            registerPush();
             trainingUtils.hideProgress();
             $scope.form = {};
             $state.go("app.main.products");
@@ -49,6 +34,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
         promise.then(function (user) {
           trainingUtils.hideProgress();
           $scope.form = {};
+          registerPush();
           $state.go("app.main.products");
         }, function (err) {
             console.log("mic login error " + JSON.stringify(err.message));
@@ -91,6 +77,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
             var promise = user.connect($kinvey.SocialIdentity.Facebook, token);
             promise.then(function(user) {
                 console.log("login user " + JSON.stringify(user));
+                registerPush();
                 trainingUtils.hideProgress();
                 $state.go("app.main.products");
             }).catch(function(error) {
@@ -100,5 +87,24 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
             });
         }
 
+    };
+
+    function registerPush() {
+        var promise = $kinvey.Push.register({
+            android: {
+                senderID: '856811466642'
+            },
+            ios: {
+                alert: true,
+                badge: true,
+                sound: true
+            }
+        }).then(function (response) {
+            console.log("register push " + JSON.stringify(response));
+        }).catch(function (error) {
+                console.log("register push error " + JSON.stringify(error));
+                trainingUtils.showOkDialog("Error: " + error.message);
+            }
+        );
     }
 }]);
