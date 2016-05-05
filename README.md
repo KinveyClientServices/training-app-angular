@@ -15,9 +15,10 @@ A sample Angular/Ionic app which demonstrates the basic functionality of the Kin
   
 Users that have Mac or Linux machines should run above commands with sudo
 
-
 ### Getting Started
 * npm install
+* bower install
+* gulp && ionic serve
 * npm emulate run-android
 * npm emulate run-ios
 * npm run run-android
