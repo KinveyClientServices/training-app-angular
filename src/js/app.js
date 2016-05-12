@@ -29,13 +29,6 @@ app.run(function ($ionicPlatform, $state, $kinvey) {
 });
 
 //TODO: LAB: initialize Kinvey
-app.config(['$kinveyProvider', function ($kinveyProvider) {
-    $kinveyProvider.init({
-        host: 'baas.kinvey.com',
-        appKey: 'kid_Wy7NMiwaTx',
-        appSecret: '18e581bc9c7046a5b1b20ae838105126'
-    });
-}]);
 
 app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
     $ionicConfigProvider.tabs.position('bottom');
