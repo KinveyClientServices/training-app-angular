@@ -83,30 +83,30 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                 trainingUtils.hideProgress();
                 trainingUtils.showOkDialog("Error: " + err.message);
             });
+        };
 
-            $scope.findPartners = function(searchName){
-                trainingUtils.showProgress();
-                var query = new $kinvey.Query();
-                searchName = searchName ? searchName : "";
-                query.matches("partnername","^" + searchName);
-                //TODO: LAB: Get all Partners by query
-                dataStore.find(query).then(function (result) {
-                    $scope.partners = result.cache;
-                    return result.networkPromise;
-                }).then(function (partners) {
-                    $scope.partners = partners;
-                    $scope.$apply();
-                    trainingUtils.hideProgress();
-                }).catch(function(err){
-                    console.log("err " + JSON.stringify(err.message));
-                    trainingUtils.hideProgress();
-                    trainingUtils.showOkDialog("Error: " + err.message);
-                });
-            };
-
-            $scope.addPartner = function () {
-                $state.go("app.newPartner");
-            };
+        $scope.findPartners = function(searchName){
+            trainingUtils.showProgress();
+            var query = new $kinvey.Query();
+            searchName = searchName ? searchName : "";
+            query.matches("partnername","^" + searchName);
+            //TODO: LAB: Get all Partners by query
+            dataStore.find(query).then(function (result) {
+                $scope.partners = result.cache;
+                return result.networkPromise;
+            }).then(function (partners) {
+                $scope.partners = partners;
+                $scope.$apply();
+                trainingUtils.hideProgress();
+            }).catch(function(err){
+                console.log("err " + JSON.stringify(err.message));
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.message);
+            });
+        };
+    
+        $scope.addPartner = function () {
+            $state.go("app.newPartner");
         };
     }])
     .controller('PartnerCtrl', ['$scope', '$kinvey', '$ionicNavBarDelegate', "$state", "trainingUtils", function ($scope, $kinvey, $ionicNavBarDelegate, $state, trainingUtils) {
