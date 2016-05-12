@@ -7,7 +7,8 @@ http://devcenter.kinvey.com/angular-v3.0
 ### Prerequisites
 **Please complete this prior to your Kinvey training class**
 
-* make sure that you have nodejs installed https://nodejs.org/en/
+* Install nodejs https://nodejs.org/en/
+* Install git cli: https://git-scm.com/downloads
 * install cordova
   npm install -g cordova
 * install ionic
@@ -25,6 +26,19 @@ Choose how you'd like to run the app
 * npm emulate run-ios
 * npm run run-android
 * npm run run-ios
+
+### Data Model
+* Partner
+  * partnername
+  * partnercopmany
+  * partneremail
+* Todo
+  * action
+  * duedate
+  * completed
+* Products
+  * productname
+  * productdesc
 
 ### Training
 The goal of the training is to be exposed to the different forms of data and auth access provides.
