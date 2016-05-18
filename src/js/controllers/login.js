@@ -11,35 +11,26 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
     $scope.form = {};
 
     $scope.login = function (username, password) {
-        trainingUtils.showProgress();
-        var user = new $kinvey.User();
         //TODO: LAB: implement user login
-        var promise = user.login(username, password);
-        promise.then(function (user) {
-            registerPush();
-            trainingUtils.hideProgress();
-            $scope.form = {};
-            $state.go("app.main.products");
-        }, function (err) {
-            console.log("err " + JSON.stringify(err.message));
-            trainingUtils.hideProgress();
-            trainingUtils.showOkDialog("Error: " + err.message);
-        });
+        //     registerPush();
+        //     $scope.form = {};
+        //     $state.go("app.main.products");
+        // }, function (err) {
+        //     console.log("err " + JSON.stringify(err.message));
+        //     trainingUtils.hideProgress();
+        //     trainingUtils.showOkDialog("Error: " + err.message);
+        // });
     };
 
     $scope.micLogin = function () {
-        var user = new $kinvey.User();
         //TODO: LAB: implement MIC login
-        var promise = user.loginWithMIC('http://localhost:8100');
-        promise.then(function (user) {
-          trainingUtils.hideProgress();
-          $scope.form = {};
-          registerPush();
-          $state.go("app.main.products");
-        }, function (err) {
-            console.log("mic login error " + JSON.stringify(err.message));
-            trainingUtils.showOkDialog("Error: " + err.message);
-        });
+        //   $scope.form = {};
+        //   registerPush();
+        //   $state.go("app.main.products");
+        // }, function (err) {
+        //     console.log("mic login error " + JSON.stringify(err.message));
+        //     trainingUtils.showOkDialog("Error: " + err.message);
+        // });
     };
 
     $scope.loginFB = function(){
