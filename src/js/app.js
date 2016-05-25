@@ -150,6 +150,15 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
                     controller: "LogoutCtrl"
                 }
             }
+        })
+        .state("app.sync", {
+            url: "/sync",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/sync.html",
+                    controller: "SyncCtrl"
+                }
+            }
         });
 
     //$urlRouterProvider.otherwise("/app/login");
