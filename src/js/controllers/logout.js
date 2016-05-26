@@ -4,20 +4,35 @@ angular.module('myApp').controller('LogoutCtrl', ['$scope', '$kinvey', 'training
         viewData.enableBack = true;
     });
 
+    function logoutKinvey(user) {
+        //TODO: LAB:implement logout
+        user.logout().then(successLogoutCallback).catch(errorLogoutCallback);
+    }
+
+    function successLogoutCallback() {
+        console.log("logout with success");
+        trainingUtils.hideProgress();
+        $state.go("app.login");
+    }
+
+    function errorLogoutCallback(err) {
+        console.log("logout error " + JSON.stringify(err.message));
+        trainingUtils.hideProgress();
+        trainingUtils.showOkDialog("Error: " + err.message);
+    }
+
     $scope.logout = function () {
         var user = $kinvey.User.getActiveUser();
         if (user) {
             trainingUtils.showProgress();
-            //TODO: LAB:implement logout
-            user.logout().then(function () {
-                console.log("logout with success");
-                trainingUtils.hideProgress();
-                $state.go("app.login");
-            }).catch(function (err) {
-                console.log("logout error " + JSON.stringify(err.message));
-                trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.message);
-            });
+            if (!(user._socialIdentity && user._socialIdentity.facebook)) {
+                logoutKinvey(user)
+            } else {
+                facebookConnectPlugin.logout(function () {
+                    console.log("facebook logout success");
+                    logoutKinvey(user)
+                }, errorLogoutCallback);
+            }
         }
     }
 }]);

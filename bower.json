@@ -1,11 +1,12 @@
 {
-  "name": "HelloIonic",
+  "name": "kinvey-training",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.2.4"
   },
+  "_comment": "TODO: LAB: Update the SDK to latest version",
   "dependencies": {
     "ngCordova": "~0.1.24-alpha",
-    "kinvey-angular-sdk": "3.0.0-beta.16"
+    "kinvey-angular-sdk": "3.0.0-beta.18"
   }
 }

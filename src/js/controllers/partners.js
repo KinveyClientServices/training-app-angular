@@ -6,43 +6,17 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             $scope.search = {
                 name: ""
             };
-            $scope.loadPartners();
+            $scope.pullPartners();
         });
 
         $scope.partners = [];
 
-        var dataStore = $kinvey.DataStore.getInstance('Partner', $kinvey.DataStoreType.Cache);
+        //TODO: LAB: create a data store to access Partner APIs
+        var dataStore = $kinvey.DataStore.getInstance('Partner', $kinvey.DataStoreType.Sync);
 
-        //TODO: LAB: Get all Partners by query
-        $scope.loadPartners = function(searchName){
-            trainingUtils.showProgress();
-            var query = new $kinvey.Query();
-            searchName = searchName ? searchName : "";
-            query.matches("partnername","^" + searchName);
-            dataStore.find(query).then(function (result) {
-                $scope.partners = result.cache;
-                return result.networkPromise;
-            }).then(function (partners) {
-                $scope.partners = partners;
-                $scope.$apply();
-                trainingUtils.hideProgress();
-            }).catch(function(err){
-                console.log("err " + JSON.stringify(err.message));
-                trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.message);
-            });
-        };
-        $scope.loadPartners();
-
-
-        $scope.addPartner = function () {
-            console.log("add partner");
-            $state.go("app.newPartner");
-        };
-
-        //TODO: LAB: Cache data from Kinvey locally
         $scope.pullPartners = function () {
             trainingUtils.showProgress();
+          //TODO: LAB: Cache data from Kinvey cloud locally
             dataStore.pull().then(function (result) {
                 $scope.partners = result;
                 $scope.$apply();
@@ -54,9 +28,9 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             });
         };
 
-        //TODO: LAB: Push cached changes to Kinvey
         $scope.pushPartners = function () {
             trainingUtils.showProgress();
+          //TODO: LAB: Push offline changes to Kinvey
             dataStore.push().then(function (result) {
                 console.log("result push" + JSON.stringify(result));
                 trainingUtils.hideProgress();
@@ -82,9 +56,9 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             });
         };
 
-        //TODO: LAB: sync cached changes and get new updates
         $scope.syncPartners = function () {
             trainingUtils.showProgress();
+          //TODO: LAB: sync cached changes and get new updates
             dataStore.sync().then(function (syncResult) {
                 console.log("result sync" + JSON.stringify(syncResult));
                 var result = syncResult.push;
@@ -110,15 +84,41 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                 trainingUtils.showOkDialog("Error: " + err.message);
             });
         };
+
+        $scope.findPartners = function(searchName){
+            trainingUtils.showProgress();
+            var query = new $kinvey.Query();
+            searchName = searchName ? searchName : "";
+            query.matches("partnername","^" + searchName);
+            //TODO: LAB: Get all Partners by query
+            dataStore.find(query).then(function (result) {
+                $scope.partners = result.cache;
+                return result.networkPromise;
+            }).then(function (partners) {
+                $scope.partners = partners;
+                $scope.$apply();
+                trainingUtils.hideProgress();
+            }).catch(function(err){
+                console.log("err " + JSON.stringify(err.message));
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.message);
+            });
+        };
+    
+        $scope.addPartner = function () {
+            $state.go("app.newPartner");
+        };
     }])
     .controller('PartnerCtrl', ['$scope', '$kinvey', '$ionicNavBarDelegate', "$state", "trainingUtils", function ($scope, $kinvey, $ionicNavBarDelegate, $state, trainingUtils) {
         $scope.partner = {};
 
-        var dataStore = $kinvey.DataStore.getInstance('Partner', $kinvey.DataStoreType.Cache);
+        //TODO: LAB: create a data store to save a partner
+        var dataStore = $kinvey.DataStore.getInstance('Partner', $kinvey.DataStoreType.Sync);
 
         $scope.savePartner = function (partner) {
             trainingUtils.showProgress();
             console.log("partner " + JSON.stringify(partner));
+          //TODO: LAB: Save a new Partner object to offline sync store
             dataStore.save(partner).then(function (entity) {
                 console.log("entity " + JSON.stringify(entity));
                 trainingUtils.hideProgress();

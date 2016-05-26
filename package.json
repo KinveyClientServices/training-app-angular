@@ -21,7 +21,24 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    {
+      "id": "cordova-plugin-facebook4",
+      "locator": "cordova-plugin-facebook4",
+      "variables": {
+        "APP_ID": "265471787126357",
+        "APP_NAME": "com.kinvey.training"
+      }
+    },
+    {
+      "id": "phonegap-plugin-push",
+      "locator": "phonegap-plugin-push",
+      "variables": {
+        "SENDER_ID": "856811466642"
+      }
+    },
+    "cordova-plugin-dialogs",
+    "cordova-plugin-vibration"
   ],
   "cordovaPlatforms": [
     "android",
@@ -32,10 +49,11 @@
     }
   ],
   "scripts": {
-    "emulate-android": "gulp;cordova emulate android",
-    "emulate-ios": "gulp;cordova emulate ios",
-    "run-android": "gulp;cordova run android",
-    "run-ios": "gulp;cordova run ios",
-    "install":"ionic state reset; bower install"
+    "ionic": "gulp && ionic serve",
+    "emulate-android": "gulp && cordova emulate android",
+    "emulate-ios": "gulp && cordova emulate ios",
+    "run-android": "gulp && cordova run android",
+    "run-ios": "gulp && cordova run ios",
+    "install":"ionic state reset && bower install"
   }
 }
