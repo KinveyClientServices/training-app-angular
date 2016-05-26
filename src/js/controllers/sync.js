@@ -18,7 +18,7 @@ angular.module('myApp')
             });
         };
 
-        $scope.bunchSync = function () {
+        $scope.bulkSync = function () {
             trainingUtils.showProgress();
             workOrderDataStore.sync().then(function (syncResult) {
                 var result = syncResult.push;

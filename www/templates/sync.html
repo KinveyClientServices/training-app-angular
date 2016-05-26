@@ -1,13 +1,13 @@
 <ion-view>
     <ion-nav-title>
-        Bunch Sync
+        Work Order Sync
     </ion-nav-title>
     <ion-content class="training-content center">
         <label class="item item-input">
-            <label class="input-label">WorkOrder entities count</label>
+            <label class="input-label">Work Order Generation</label>
             <input type="number" ng-model="workOrderCount">
         </label>
-        <button class="button button-positive" ng-click="bunchSync()">Bunch sync</button>
+        <button class="button button-positive" ng-click="bulkSync()">Sync to Cloud</button>
         <button class="button button-positive" ng-click="generateData(workOrderCount)">Generate data</button>
     </ion-content>
 </ion-view>

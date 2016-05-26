@@ -12,7 +12,7 @@ angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $stat
         $state.go("app.logout");
     };
 
-    var bunchSyncClick = function () {
+    var bulkSyncClick = function () {
         $state.go("app.sync");
     };
 
@@ -26,8 +26,8 @@ angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $stat
             "click": mediaClick
         },
         {
-            "title": "Bunch Sync",
-            "click": bunchSyncClick
+            "title": "Work Orders",
+            "click": bulkSyncClick
         },
         {
             "title": "Logout",
