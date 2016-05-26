@@ -21,7 +21,6 @@ angular.module('myApp')
         $scope.bunchSync = function () {
             trainingUtils.showProgress();
             workOrderDataStore.sync().then(function (syncResult) {
-                console.log("result sync" + JSON.stringify(syncResult));
                 var result = syncResult.push;
                 trainingUtils.hideProgress();
                 if (result.error && result.error.length != 0) {
@@ -59,20 +58,22 @@ angular.module('myApp')
         }
 
         function generateWorkOrders(employees, workOrderCount, callback) {
-                var employeesCount = employees.length,
+            var employeesCount = employees.length,
                 workOrders = [];
             for (var i = 0; i < workOrderCount; i++) {
                 var workOrderEntity = {
                     "title": Date.now(),
                     "employee_id": employees[i % employeesCount]._id
                 };
-                workOrders.push(workOrderDataStore.save(workOrderEntity));
+                workOrders.push(workOrderEntity);
             }
-            console.log("workor" + workOrderCount);
-            Promise.all(workOrders).then(function (value) {
-                return callback();
-            }, function (reason) {
-                return callback();
+
+            workOrderDataStore.save(workOrders).then(function (res) {
+                return callback()
+            }).catch(function (err) {
+                console.log("err " + JSON.stringify(err.message));
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.message);
             });
         }
     }]);
