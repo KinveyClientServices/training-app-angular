@@ -16,18 +16,16 @@ angular.module('myApp')
         //$scope.products
         $scope.loadProducts = function(query){
             trainingUtils.showProgress();
-            dataStore.find(query).then(function (result) {
+            dataStore.find(query).subscribe(function (result) {
                 console.log(JSON.stringify(result));
-                $scope.products = result.cache;
-                return result.networkPromise;
-            }).then(function (products) {
-                $scope.products = products;
-                $scope.$apply();
+                $scope.products = result;
                 trainingUtils.hideProgress();
-            }).catch(function(err){
+            }, function(err){
                 console.log("err " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
                 trainingUtils.showOkDialog("Error: " + err.message);
+            }, function() {
+                //completed
             });
         };
 

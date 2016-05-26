@@ -13,14 +13,16 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
 
         $scope.loadMedia = function () {
             trainingUtils.showProgress();
-            dataStore.find().then(function (entities) {
+            dataStore.find().subscribe(function (entities) {
                 $scope.medias = entities;
                 $scope.$apply();
                 trainingUtils.hideProgress();
-            }).catch(function (err) {
+            }, function (err) {
                 console.log("err " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
                 trainingUtils.showOkDialog("Error: " + err.message);
+            }, function() {
+                //completed
             });
         };
 

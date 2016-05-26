@@ -6,7 +6,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             $scope.search = {
                 name: ""
             };
-            $scope.pullPartners();
+            $scope.findPartners();
         });
 
         $scope.partners = [];
@@ -88,20 +88,19 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
         $scope.findPartners = function(searchName){
             trainingUtils.showProgress();
             var query = new $kinvey.Query();
-            searchName = searchName ? searchName : "";
-            query.matches("partnername","^" + searchName);
+            if(searchName) {
+                query.matches("partnername", "^" + searchName);
+            }
             //TODO: LAB: Get all Partners by query
-            dataStore.find(query).then(function (result) {
-                $scope.partners = result.cache;
-                return result.networkPromise;
-            }).then(function (partners) {
-                $scope.partners = partners;
-                $scope.$apply();
+            dataStore.find(query).subscribe(function (result) {
+                $scope.partners = result;
                 trainingUtils.hideProgress();
-            }).catch(function(err){
+            }, function (error) {
                 console.log("err " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
                 trainingUtils.showOkDialog("Error: " + err.message);
+            }, function() {
+                //completed
             });
         };
     
