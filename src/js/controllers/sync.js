@@ -6,7 +6,7 @@ angular.module('myApp')
         $scope.workOrderCount = 0;
 
         var workOrderDataStore = $kinvey.DataStore.getInstance('WorkOrder', $kinvey.DataStoreType.Sync),
-            employeesDataStore = $kinvey.DataStore.getInstance('Employees');
+            employeesDataStore = $kinvey.DataStore.getInstance('Employees', $kinvey.DataStoreType.Network);
 
         $scope.generateData = function (count) {
             trainingUtils.showProgress();
@@ -46,9 +46,7 @@ angular.module('myApp')
         };
 
         function getEmployees(callback) {
-            employeesDataStore.find().then(function (result) {
-                return result.networkPromise;
-            }).then(function (employees) {
+            employeesDataStore.find().then(function (employees) {
                 return callback(employees)
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err.message));
