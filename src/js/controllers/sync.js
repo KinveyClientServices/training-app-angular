@@ -46,12 +46,14 @@ angular.module('myApp')
         };
 
         function getEmployees(callback) {
-            employeesDataStore.find().then(function (employees) {
+            employeesDataStore.find().subscribe(function(employees) {
                 return callback(employees)
-            }).catch(function (err) {
+            }, function(err) {
                 console.log("err " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
                 trainingUtils.showOkDialog("Error: " + err.message);
+            }, function() {
+                //completed
             });
         }
 
