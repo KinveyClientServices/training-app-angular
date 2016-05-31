@@ -21,14 +21,16 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
         var query = new $kinvey.Query();
         searchAction = searchAction ? searchAction : "";
         query.matches("action","^" + searchAction);
-        dataStore.find(query).then(function (result) {
+        dataStore.find(query).subscribe(function (result) {
             $scope.todos = result;
             $scope.$apply();
             trainingUtils.hideProgress();
-        }).catch(function (err) {
+        }, function (err) {
             console.log("err " + JSON.stringify(err.message));
             trainingUtils.hideProgress();
             trainingUtils.showOkDialog("Error: " + err.message);
+        }, function() {
+            //completed
         });
     };
 
