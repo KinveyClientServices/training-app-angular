@@ -12,6 +12,10 @@ angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $stat
         $state.go("app.logout");
     };
 
+    var bulkSyncClick = function () {
+        $state.go("app.sync");
+    };
+
     $scope.leftMenuItems = [
         {
             "title": "Create Todo",
@@ -20,6 +24,10 @@ angular.module('myApp').controller('MenuCtrl', function ($scope, $timeout, $stat
         {
             "title": "Media",
             "click": mediaClick
+        },
+        {
+            "title": "Work Orders",
+            "click": bulkSyncClick
         },
         {
             "title": "Logout",
