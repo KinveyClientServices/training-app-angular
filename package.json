@@ -52,8 +52,8 @@
     "ionic": "gulp && ionic serve",
     "emulate-android": "gulp && cordova emulate android",
     "emulate-ios": "gulp && cordova emulate ios",
-    "run-android": "gulp && cordova run android",
-    "run-ios": "gulp && cordova run ios",
+    "android": "gulp && cordova run android",
+    "ios": "gulp && cordova run ios",
     "install":"ionic state reset && bower install"
   }
 }

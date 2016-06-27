@@ -3,6 +3,10 @@
 angular.module('myApp')
     .controller('SyncCtrl', ['$scope', '$kinvey', 'trainingUtils', function ($scope, $kinvey, trainingUtils) {
 
+        $kinvey.Push.onNotification(function(data) {
+          console.log("RECEIVED PUSH: " + JSON.stringify(data));
+        });
+
         $scope.workOrderCount = 0;
 
         var workOrderDataStore = $kinvey.DataStore.getInstance('WorkOrder', $kinvey.DataStoreType.Sync),
