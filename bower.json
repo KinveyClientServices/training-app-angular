@@ -7,6 +7,6 @@
   "_comment": "TODO: LAB: Update the SDK to latest version",
   "dependencies": {
     "ngCordova": "~0.1.24-alpha",
-    "kinvey-angular-sdk": "3.0.0-beta.26"
+    "kinvey-angular-sdk": "3.0.0-beta.28"
   }
 }
