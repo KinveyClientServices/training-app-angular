@@ -14,9 +14,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
         trainingUtils.showProgress();
         var user = new $kinvey.User();
         //TODO: LAB: implement user login
-        var promise = user.login(username, password);
         promise.then(function (user) {
-            registerPush();
             trainingUtils.hideProgress();
             $scope.form = {};
             $state.go("app.main.products");
@@ -30,11 +28,9 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
     $scope.micLogin = function () {
         var user = new $kinvey.User();
         //TODO: LAB: implement MIC login
-        var promise = user.loginWithMIC('http://localhost:8100', $kinvey.AuthorizationGrant.AuthorizationCodeLoginPage, {version: "v2"});
         promise.then(function (user) {
           trainingUtils.hideProgress();
           $scope.form = {};
-          registerPush();
           $state.go("app.main.products");
         }, function (err) {
             console.log("mic login error " + JSON.stringify(err.message));
@@ -90,21 +86,11 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
     };
 
     function registerPush() {
-        var promise = $kinvey.Push.register({
-            android: {
-                senderID: '856811466642'
-            },
-            ios: {
-                alert: true,
-                badge: true,
-                sound: true
-            }
         }).then(function (response) {
             console.log("register push " + JSON.stringify(response));
         }).catch(function (error) {
-                console.log("register push error " + JSON.stringify(error));
-                trainingUtils.showOkDialog("Error: " + error.message);
-            }
-        );
+            console.log("register push error " + JSON.stringify(error));
+            trainingUtils.showOkDialog("Error: " + error.message);
+        });
     }
 }]);

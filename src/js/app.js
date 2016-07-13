@@ -28,14 +28,8 @@ app.run(function ($ionicPlatform, $state, $kinvey) {
     });
 });
 
-//TODO: LAB: initialize Kinvey
+//TODO: LAB: initialize Kinvey + app version + dedicated instance host
 app.config(['$kinveyProvider', function ($kinveyProvider) {
-    $kinveyProvider.init({
-        host: 'baas.kinvey.com',
-        appKey: 'kid_Wy7NMiwaTx',
-        appSecret: '18e581bc9c7046a5b1b20ae838105126',
-        appVersion: '0.1.2'
-    });
 }]);
 
 app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {

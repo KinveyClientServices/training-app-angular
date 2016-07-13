@@ -10,17 +10,7 @@ angular.module('myApp')
             trainingUtils.showProgress();
             var query = new $kinvey.Query();
             query.equalTo('mimeType','application/pdf');
-            var fileStore = new $kinvey.FileStore();
-            var promise = fileStore.find();
-            promise.then(function(files) {
-                $scope.collaterals = files;
-                $scope.$apply();
-                trainingUtils.hideProgress();
-            }).catch(function(err) {
-                console.log("fetch collaterals error " + JSON.stringify(err.message));
-                trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.message);
-            });
+            trainingUtils.hideProgress();
         };
 
         $scope.openPdfFile = function(url){

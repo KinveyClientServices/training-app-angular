@@ -6,7 +6,6 @@ angular.module('myApp').controller('LogoutCtrl', ['$scope', '$kinvey', 'training
 
     function logoutKinvey(user) {
         //TODO: LAB:implement logout
-        user.logout().then(successLogoutCallback).catch(errorLogoutCallback);
     }
 
     function successLogoutCallback() {
