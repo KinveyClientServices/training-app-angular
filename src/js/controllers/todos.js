@@ -12,7 +12,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
     $scope.todos = [];
 
     //TODO: LAB: create sync data store
-    var dataStore = $kinvey.DataStore.getInstance('Todo', $kinvey.DataStoreType.Sync);
+    var dataStore = $kinvey.DataStore.collection('Todo', $kinvey.DataStoreType.Sync);
 
     //TODO: LAB: get all Todos
     //$scope.todos

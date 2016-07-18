@@ -6,7 +6,7 @@ angular.module('myApp').controller('InsertCtrl', ['$scope', '$kinvey','trainingU
             viewData.enableBack = true;
         });
 
-        var dataStore = $kinvey.DataStore.getInstance('Todo',$kinvey.DataStoreType.Sync);
+        var dataStore = $kinvey.DataStore.collection('Todo',$kinvey.DataStoreType.Sync);
 
         //TODO: LAB: Define Todo JSON
         $scope.todo = {

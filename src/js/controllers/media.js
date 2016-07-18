@@ -9,7 +9,7 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
         $scope.medias = [];
 
         //TODO: LAB: Create a Network Data Store
-        var dataStore = $kinvey.DataStore.getInstance('Media', $kinvey.DataStoreType.Network);
+        var dataStore = $kinvey.DataStore.collection('Media', $kinvey.DataStoreType.Network);
 
         $scope.loadMedia = function () {
             trainingUtils.showProgress();
@@ -74,7 +74,7 @@ angular.module('myApp').controller('MediaCtrl', ['$scope', '$kinvey', "$state", 
 
         $scope.media = {};
 
-        var dataStore = $kinvey.DataStore.getInstance('Media', $kinvey.DataStoreType.Network);
+        var dataStore = $kinvey.DataStore.collection('Media', $kinvey.DataStoreType.Network);
 
         $scope.saveMedia = function (media) {
             trainingUtils.showProgress();

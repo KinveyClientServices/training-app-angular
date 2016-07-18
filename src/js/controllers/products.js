@@ -10,7 +10,7 @@ angular.module('myApp')
 //        });
 
         //TODO: LAB: Create a default data store. SDK defaults to Cache Store
-        var dataStore = $kinvey.DataStore.getInstance('Products');
+        var dataStore = $kinvey.DataStore.collection('Products');
 
         //TODO: LAB: Get all products by query
         //$scope.products

@@ -9,8 +9,8 @@ angular.module('myApp')
 
         $scope.workOrderCount = 0;
 
-        var workOrderDataStore = $kinvey.DataStore.getInstance('WorkOrder', $kinvey.DataStoreType.Sync),
-            employeesDataStore = $kinvey.DataStore.getInstance('Employees', $kinvey.DataStoreType.Network);
+        var workOrderDataStore = $kinvey.DataStore.collection('WorkOrder', $kinvey.DataStoreType.Sync),
+            employeesDataStore = $kinvey.DataStore.collection('Employees', $kinvey.DataStoreType.Network);
 
         $scope.generateData = function (count) {
             trainingUtils.showProgress();

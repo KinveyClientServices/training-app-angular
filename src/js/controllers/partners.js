@@ -12,7 +12,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
         $scope.partners = [];
 
         //TODO: LAB: create a data store to access Partner APIs
-        var dataStore = $kinvey.DataStore.getInstance('Partner', $kinvey.DataStoreType.Sync);
+        var dataStore = $kinvey.DataStore.collection('Partner', $kinvey.DataStoreType.Sync);
 
         $scope.pullPartners = function () {
             trainingUtils.showProgress();
@@ -112,7 +112,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
         $scope.partner = {};
 
         //TODO: LAB: create a data store to save a partner
-        var dataStore = $kinvey.DataStore.getInstance('Partner', $kinvey.DataStoreType.Sync);
+        var dataStore = $kinvey.DataStore.collection('Partner', $kinvey.DataStoreType.Sync);
 
         $scope.savePartner = function (partner) {
             trainingUtils.showProgress();

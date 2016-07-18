@@ -19,7 +19,7 @@ app.run(function ($ionicPlatform, $state, $kinvey) {
             cordova.plugins.Keyboard.disableScroll(true);
         }
         var user = $kinvey.User.getActiveUser();
-        console.log("active user" + JSON.stringify(user));
+        console.log("active user: " + JSON.stringify(user));
         if(user){
             $state.go("app.main.products");
         }else{
@@ -31,7 +31,7 @@ app.run(function ($ionicPlatform, $state, $kinvey) {
 //TODO: LAB: initialize Kinvey
 app.config(['$kinveyProvider', function ($kinveyProvider) {
     $kinveyProvider.init({
-        host: 'baas.kinvey.com',
+        apiHostname: 'https://baas.kinvey.com',
         appKey: 'kid_Wy7NMiwaTx',
         appSecret: '18e581bc9c7046a5b1b20ae838105126',
         appVersion: '0.1.2'
