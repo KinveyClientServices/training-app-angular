@@ -14,6 +14,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
         trainingUtils.showProgress();
         var user = new $kinvey.User();
         //TODO: LAB: implement user login
+        var promise = $kinvey.User.login(username, password);
         promise.then(function (user) {
             trainingUtils.hideProgress();
             $scope.form = {};
@@ -86,6 +87,15 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
     };
 
     function registerPush() {
+        var promise = $kinvey.Push.register({
+          // android: {
+          //   senderID: '<Google Project ID>'
+          // },
+          // ios: {
+          //   alert: true,
+          //   badge: true,
+          //   sound: true
+          // }
         }).then(function (response) {
             console.log("register push " + JSON.stringify(response));
         }).catch(function (error) {

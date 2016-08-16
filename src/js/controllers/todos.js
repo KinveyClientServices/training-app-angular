@@ -12,6 +12,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
     $scope.todos = [];
 
     //TODO: LAB: create sync data store
+    var dataStore = $kinvey.DataStore.getInstance('ToDo', $kinvey.DataStoreType.Sync);
 
     //TODO: LAB: get all Todos
     //$scope.todos
@@ -35,22 +36,49 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
 
     //TODO: LAB: pull Todos
     $scope.pullTodos = function () {
+        console.log("pullTodos");
         trainingUtils.showProgress();
-        trainingUtils.hideProgress();
-    };
+        dataStore.pull().then(function(entities) {
+            console.log("pullTodos data - ");
+            // console.log("pullTodos data - " + JSON.stringify(entities));
+            $scope.todos = entities;
+            $scope.$apply();
+            trainingUtils.hideProgress();
+        }).catch(function(err) {
+            console.log("err " + JSON.stringify(err.message));
+            trainingUtils.hideProgress();
+            trainingUtils.showOkDialog("Error: " + err.message);
+        });
+   };
 
-    $scope.pullTodos();
+    // $scope.pullTodos();
 
     //TODO: LAB: sync Todos
     $scope.syncTodos = function () {
         trainingUtils.showProgress();
-        trainingUtils.hideProgress();
+        dataStore.sync().then(function(result) {
+            $scope.todos = result;
+            $scope.$apply();
+            trainingUtils.hideProgress();
+        }, function (err) {
+            console.log("err " + JSON.stringify(err.message));
+            trainingUtils.hideProgress();
+            trainingUtils.showOkDialog("Error: " + err.message);
+        });
     };
 
     //TODO: LAB: push Todos
     $scope.pushTodos = function () {
         trainingUtils.showProgress();
-        trainingUtils.hideProgress();
+        dataStore.push().then(function(result) {
+            $scope.todos = result;
+            $scope.$apply();
+            trainingUtils.hideProgress();
+        }).catch(function(err) {
+            console.log("err " + JSON.stringify(err.message));
+            trainingUtils.hideProgress();
+            trainingUtils.showOkDialog("Error: " + err.message);
+        });
     };
 
     $scope.editTodo = function (todo) {
@@ -67,6 +95,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
     //TODO: LAB: delete Todos
     $scope.deleteTodo = function (todo, index) {
         trainingUtils.showProgress();
+        // 
         trainingUtils.hideProgress();
     }
 

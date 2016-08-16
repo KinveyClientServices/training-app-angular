@@ -17,6 +17,7 @@ angular.module('myApp').controller('InsertCtrl', ['$scope', '$kinvey','trainingU
 
         //TODO: LAB: Create a Todo
         $scope.insert = function (todo) {
+            console.log("Here to add Todo");
             trainingUtils.showProgress();
             trainingUtils.hideProgress();
             trainingUtils.showOkDialog("Todo was added with success");

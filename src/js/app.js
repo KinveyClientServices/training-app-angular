@@ -30,6 +30,12 @@ app.run(function ($ionicPlatform, $state, $kinvey) {
 
 //TODO: LAB: initialize Kinvey + app version + dedicated instance host
 app.config(['$kinveyProvider', function ($kinveyProvider) {
+    $kinveyProvider.init({
+        apiHostname: 'https://baas.kinvey.com',
+        // micHostname: '<micHostname>',
+        appKey: 'kid_Wy7NMiwaTx',
+        appSecret: '18e581bc9c7046a5b1b20ae838105126'
+    });    
 }]);
 
 app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
