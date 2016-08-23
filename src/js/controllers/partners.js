@@ -16,7 +16,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
 
         $scope.pullPartners = function () {
             trainingUtils.showProgress();
-          //TODO: LAB: Cache data from Kinvey cloud locally
+            //TODO: LAB: Cache data from Kinvey cloud locally
             dataStore.pull().then(function (result) {
                 $scope.partners = result;
                 $scope.$apply();
@@ -30,7 +30,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
 
         $scope.pushPartners = function () {
             trainingUtils.showProgress();
-          //TODO: LAB: Push offline changes to Kinvey
+            //TODO: LAB: Push offline changes to Kinvey
             dataStore.push().then(function (result) {
                 console.log("result push" + JSON.stringify(result));
                 trainingUtils.hideProgress();
@@ -58,7 +58,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
 
         $scope.syncPartners = function () {
             trainingUtils.showProgress();
-          //TODO: LAB: sync cached changes and get new updates
+            //TODO: LAB: sync cached changes and get new updates
             dataStore.sync().then(function (syncResult) {
                 console.log("result sync" + JSON.stringify(syncResult));
                 var result = syncResult.push;
@@ -117,7 +117,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
         $scope.savePartner = function (partner) {
             trainingUtils.showProgress();
             console.log("partner " + JSON.stringify(partner));
-          //TODO: LAB: Save a new Partner object to offline sync store
+            //TODO: LAB: Save a new Partner object to offline sync store
             dataStore.save(partner).then(function (entity) {
                 console.log("entity " + JSON.stringify(entity));
                 trainingUtils.hideProgress();

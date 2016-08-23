@@ -6,7 +6,7 @@ angular.module('myApp').controller('InsertCtrl', ['$scope', '$kinvey','trainingU
             viewData.enableBack = true;
         });
 
-        var dataStore = $kinvey.DataStore.getInstance('Todo',$kinvey.DataStoreType.Sync);
+        var dataStore = $kinvey.DataStore.getInstance('WaniTodo',$kinvey.DataStoreType.Sync);
 
         //TODO: LAB: Define Todo JSON
         $scope.todo = {
@@ -19,7 +19,14 @@ angular.module('myApp').controller('InsertCtrl', ['$scope', '$kinvey','trainingU
         $scope.insert = function (todo) {
             console.log("Here to add Todo");
             trainingUtils.showProgress();
-            trainingUtils.hideProgress();
-            trainingUtils.showOkDialog("Todo was added with success");
+            var promise = dataStore.save(todo).then(function(entity) {
+                console.log("local insert " + JSON.stringify(entity));
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Todo was added with success");
+            }).catch(function(err) {
+                console.log("local insert with error " + JSON.stringify(err.message));
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.message);
+            });
         }
     }]);

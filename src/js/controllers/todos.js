@@ -12,7 +12,7 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
     $scope.todos = [];
 
     //TODO: LAB: create sync data store
-    var dataStore = $kinvey.DataStore.getInstance('ToDo', $kinvey.DataStoreType.Sync);
+    var dataStore = $kinvey.DataStore.getInstance('WaniToDo', $kinvey.DataStoreType.Sync);
 
     //TODO: LAB: get all Todos
     //$scope.todos
@@ -36,11 +36,11 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
 
     //TODO: LAB: pull Todos
     $scope.pullTodos = function () {
-        console.log("pullTodos");
+        // console.log("pullTodos");
         trainingUtils.showProgress();
-        dataStore.pull().then(function(entities) {
+        var promise = dataStore.pull().then(function(entities) {
             console.log("pullTodos data - ");
-            // console.log("pullTodos data - " + JSON.stringify(entities));
+            console.log("pullTodos data - " + JSON.stringify(entities));
             $scope.todos = entities;
             $scope.$apply();
             trainingUtils.hideProgress();
@@ -56,7 +56,8 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
     //TODO: LAB: sync Todos
     $scope.syncTodos = function () {
         trainingUtils.showProgress();
-        dataStore.sync().then(function(result) {
+        var promise = dataStore.sync().then(function(result) {
+            console.log("syncTodos data - " + JSON.stringify(result));
             $scope.todos = result;
             $scope.$apply();
             trainingUtils.hideProgress();
@@ -70,9 +71,10 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
     //TODO: LAB: push Todos
     $scope.pushTodos = function () {
         trainingUtils.showProgress();
-        dataStore.push().then(function(result) {
-            $scope.todos = result;
-            $scope.$apply();
+        var promise = dataStore.push().then(function(result) {
+            console.log("pushTodos data - " + JSON.stringify(result));
+            // $scope.todos = result;
+            // $scope.$apply();
             trainingUtils.hideProgress();
         }).catch(function(err) {
             console.log("err " + JSON.stringify(err.message));
@@ -89,14 +91,27 @@ angular.module('myApp').controller('TodoCtrl', ['$scope', '$kinvey','trainingUti
     $scope.updateTodo = function (todo) {
         trainingUtils.showProgress();
         delete todo.editAction;
-        trainingUtils.hideProgress();
+        var promise = dataStore.save(todo).then(function(entity) {
+            trainingUtils.hideProgress();
+        }).catch(function(err) {
+            console.log("local update with error " + JSON.stringify(err.message));
+            trainingUtils.hideProgress();
+            trainingUtils.showOkDialog("Error: " + err.message);
+        });
     };
 
     //TODO: LAB: delete Todos
     $scope.deleteTodo = function (todo, index) {
         trainingUtils.showProgress();
-        // 
-        trainingUtils.hideProgress();
+        var promise = dataStore.removeById(todo._id).then(function (result) {
+            $scope.todos.splice(index, 1);
+            $scope.$apply();
+            trainingUtils.hideProgress();
+        }).catch(function (err) {
+            console.log("delete with error " + JSON.stringify(err.message));
+            trainingUtils.hideProgress();
+            trainingUtils.showOkDialog("Error: " + err.message);
+        });
     }
 
 }]);

@@ -16,6 +16,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
         //TODO: LAB: implement user login
         var promise = $kinvey.User.login(username, password);
         promise.then(function (user) {
+            registerPush();
             trainingUtils.hideProgress();
             $scope.form = {};
             $state.go("app.main.products");
@@ -29,10 +30,12 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
     $scope.micLogin = function () {
         var user = new $kinvey.User();
         //TODO: LAB: implement MIC login
+        var promise = $kinvey.User.loginWithMIC('http://localhost:8100');
         promise.then(function (user) {
-          trainingUtils.hideProgress();
-          $scope.form = {};
-          $state.go("app.main.products");
+            registerPush();
+            trainingUtils.hideProgress();
+            $scope.form = {};
+            $state.go("app.main.products");
         }, function (err) {
             console.log("mic login error " + JSON.stringify(err.message));
             trainingUtils.showOkDialog("Error: " + err.message);
@@ -88,14 +91,14 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
 
     function registerPush() {
         var promise = $kinvey.Push.register({
-          // android: {
-          //   senderID: '<Google Project ID>'
-          // },
-          // ios: {
-          //   alert: true,
-          //   badge: true,
-          //   sound: true
-          // }
+          android: {
+            senderID: '856811466642'
+          },
+          ios: {
+            alert: true,
+            badge: true,
+            sound: true
+          }
         }).then(function (response) {
             console.log("register push " + JSON.stringify(response));
         }).catch(function (error) {

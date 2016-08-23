@@ -17,9 +17,6 @@ angular.module('myApp')
         //$scope.products
         $scope.loadProducts = function(query){
             trainingUtils.showProgress();
-            // var query = new $kinvey.Query();
-            // searchAction = searchAction ? searchAction : "";
-            // query.matches("action","^" + searchAction);
             productDataStore.find(query).subscribe(function (result) {
                 $scope.products = result;
                 $scope.$apply();
@@ -45,22 +42,32 @@ angular.module('myApp')
         //TODO: LAB: Limit Products by 4
         $scope.limitProducts = function(){
             var query = new $kinvey.Query();
-            query.addFilter("limit",2);
+            query.limit(2);
+            // query.addFilter("limit",2);
             $scope.loadProducts(query);
         };
 
         //TODO: LAB: Skip 0 and Limit 1 Product
         $scope.skipProducts = function(){
             var query = new $kinvey.Query();
-            query.addFilter("limit",1);
-            query.addFilter("skip",0);
+            query.skip(0);
+            query.limit(1);
+            // query.addFilter("limit",1);
+            // query.addFilter("skip",0);
             $scope.loadProducts(query);
         };
 
         //TODO: LAB: Delete a Product
         $scope.deleteProduct = function (product, index) {
             trainingUtils.showProgress();
-            // 
-            trainingUtils.hideProgress();
+            productDataStore.removeById(product._id).then(function (result) {
+                $scope.products.splice(index, 1);
+                $scope.$apply();
+                trainingUtils.hideProgress();
+            }).catch(function (err) {
+                console.log("delete with error " + JSON.stringify(err.message));
+                trainingUtils.hideProgress();
+                trainingUtils.showOkDialog("Error: " + err.message);
+            });
         }
     }]);
