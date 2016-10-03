@@ -5,8 +5,7 @@ angular.module('myApp').controller('LogoutCtrl', ['$scope', '$kinvey', 'training
     });
 
     function logoutKinvey(user) {
-        //TODO: LAB:implement logout
-        user.logout().then(successLogoutCallback).catch(errorLogoutCallback);
+        //TODO: LAB: implement logout
     }
 
     function successLogoutCallback() {
@@ -22,7 +21,7 @@ angular.module('myApp').controller('LogoutCtrl', ['$scope', '$kinvey', 'training
     }
 
     $scope.logout = function () {
-        var user = $kinvey.User.getActiveUser();
+        //TODO: LAB: retrieve active user
         if (user) {
             trainingUtils.showProgress();
             if (!(user._socialIdentity && user._socialIdentity.facebook)) {

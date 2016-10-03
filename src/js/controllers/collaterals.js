@@ -8,18 +8,13 @@ angular.module('myApp')
         //TODO: LAB: Get files from Kinvey
         $scope.loadCollaterals = function(){
             trainingUtils.showProgress();
-            var query = new $kinvey.Query();
-            query.equalTo('mimeType','application/pdf');
-            var promise = $kinvey.Files.find(query);
-            promise.then(function(files) {
-                $scope.collaterals = files;
-                $scope.$apply();
-                trainingUtils.hideProgress();
-            }).catch(function(err) {
-                console.log("fetch collaterals error " + JSON.stringify(err.message));
-                trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.message);
-            });
+            //     $scope.$apply();
+            //     trainingUtils.hideProgress();
+            // }).catch(function(err) {
+            //     console.log("fetch collaterals error " + JSON.stringify(err.message));
+            //     trainingUtils.hideProgress();
+            //     trainingUtils.showOkDialog("Error: " + err.message);
+            // });
         };
 
         $scope.openPdfFile = function(url){
