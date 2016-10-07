@@ -46,7 +46,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                     });
                     trainingUtils.showOkDialog("Push Failure: " + JSON.stringify(fails));
                 } else {
-                  var pushCount = result.success ? result.success.length : 0;
+                  var pushCount = result ? result.length : 0;
                   trainingUtils.showOkDialog('Push completed: ' + pushCount + ' entities pushed');
                 }
             }).catch(function (err) {

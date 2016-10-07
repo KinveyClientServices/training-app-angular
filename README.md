@@ -15,6 +15,8 @@ http://devcenter.kinvey.com/angular-v3.0
   npm install -g ionic
 * install bower
   npm install -g bower
+* install gulp 
+  npm install -g gulp
 * npm install
 * bower install
 
