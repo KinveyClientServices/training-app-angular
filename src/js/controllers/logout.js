@@ -22,11 +22,10 @@ angular.module('myApp').controller('LogoutCtrl', ['$scope', '$kinvey', 'training
     }
 
     $scope.logout = function () {
-        var user = $kinvey.User.getActiveUser();
         if (user) {
             trainingUtils.showProgress();
             if (!(user._socialIdentity && user._socialIdentity.facebook)) {
-                logoutKinvey(user)
+                //TODO
             } else {
                 facebookConnectPlugin.logout(function () {
                     console.log("facebook logout success");
