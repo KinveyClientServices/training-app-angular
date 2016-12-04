@@ -13,11 +13,13 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
 
         //TODO: LAB: create a data store to access Partner APIs
         var dataStore = $kinvey.DataStore.collection('Partner', $kinvey.DataStoreType.Sync);
+        dataStore.useDeltaFetch = true;
 
         $scope.pullPartners = function () {
             trainingUtils.showProgress();
           //TODO: LAB: Cache data from Kinvey cloud locally
-            dataStore.pull().then(function (result) {
+            var query = new $kinvey.Query();
+            dataStore.pull(query).then(function (result) {
                 $scope.partners = result;
                 $scope.$apply();
                 trainingUtils.hideProgress();
