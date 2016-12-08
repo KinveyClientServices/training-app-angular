@@ -10,23 +10,21 @@ angular.module('myApp')
 //        });
 
         //TODO: LAB: Create a default data store. SDK defaults to Cache Store
-        var dataStore = $kinvey.DataStore.collection('Products');
 
         //TODO: LAB: Get all products by query
         //$scope.products
         $scope.loadProducts = function(query){
             trainingUtils.showProgress();
-            dataStore.find(query).subscribe(function (result) {
-                console.log(JSON.stringify(result));
-                $scope.products = result;
-                trainingUtils.hideProgress();
-            }, function(err){
-                console.log("err " + JSON.stringify(err.message));
-                trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.message);
-            }, function() {
-                //completed
-            });
+            //     console.log(JSON.stringify(result));
+            //     $scope.products = result;
+            //     trainingUtils.hideProgress();
+            // }, function(err){
+            //     console.log("err " + JSON.stringify(err.message));
+            //     trainingUtils.hideProgress();
+            //     trainingUtils.showOkDialog("Error: " + err.message);
+            // }, function() {
+            //     //completed
+            // });
         };
 
         $scope.loadProducts();
@@ -56,14 +54,13 @@ angular.module('myApp')
         //TODO: LAB: Delete a Product
         $scope.deleteProduct = function (product, index) {
             trainingUtils.showProgress();
-            dataStore.removeById(product._id).then(function (res) {
-                $scope.products.splice(index, 1);
-                $scope.$apply();
-                trainingUtils.hideProgress();
-            }).catch(function (err) {
-                console.log("delete with error " + JSON.stringify(err.message));
-                trainingUtils.hideProgress();
-                trainingUtils.showOkDialog("Error: " + err.message);
-            });
+            //     $scope.products.splice(index, 1);
+            //     $scope.$apply();
+            //     trainingUtils.hideProgress();
+            // }).catch(function (err) {
+            //     console.log("delete with error " + JSON.stringify(err.message));
+            //     trainingUtils.hideProgress();
+            //     trainingUtils.showOkDialog("Error: " + err.message);
+            // });
         }
     }]);
