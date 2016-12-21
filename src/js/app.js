@@ -29,13 +29,25 @@ app.run(function ($ionicPlatform, $state, $kinvey) {
 });
 
 //TODO: LAB: initialize Kinvey
-app.config(['$kinveyProvider', function ($kinveyProvider) {
-    $kinveyProvider.init({
-        apiHostname: 'https://baas.kinvey.com',
+app.run(['$kinvey', '$rootScope', '$location', function($kinvey, $rootScope, $location) {
+  $rootScope.$on('$locationChangeStart', function(event, newUrl) {
+    if (initialized === false) {
+      event.preventDefault(); // Stop the location change
+      // Initialize Kinvey
+      $kinvey.initialize({
         appKey: 'kid_Wy7NMiwaTx',
         appSecret: '18e581bc9c7046a5b1b20ae838105126',
+        apiHostname: 'https://baas.kinvey.com',
+        micHostname: 'https://auth.kinvey.com',
         appVersion: '0.1.2'
-    });
+      }).then(function() {
+        initialized = true;
+        $location.path($location.url(newUrl).hash); // Go to the page
+      }).catch(function(error) {
+          // ...
+      });
+    }
+  });
 }]);
 
 app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
