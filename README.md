@@ -13,12 +13,9 @@ http://devcenter.kinvey.com/angular-v3.0
   npm install -g cordova
 * install ionic
   npm install -g ionic
-* install bower
-  npm install -g bower
 * install gulp 
   npm install -g gulp
 * npm install
-* bower install
 
 ### Running the app
 Choose how you'd like to run the app
