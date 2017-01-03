@@ -1,0 +1,29 @@
+<ion-view>
+    <ion-nav-title>
+        Submit a new Survey
+    </ion-nav-title>
+    <ion-nav-buttons side="left">
+    </ion-nav-buttons>
+
+    <ion-content class="training-content center">
+        <div>
+            <form>
+                <div class="list">
+                    <label class="item item-input">
+                        <label class="input-label">Title</label>
+                        <input type="text" ng-model="survey.title">
+                    </label>
+                    <label class="item item-input">
+                        <label class="input-label">Rating</label>
+                        <input type="text" ng-model="survey.rating">
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div>
+            <button class="button button-positive" type="button" ng-click="saveSurvey(survey)">Submit</button>
+            <button class="button button-assertive" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+
+    </ion-content>
+</ion-view>

@@ -19,7 +19,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
             registerPush();
             trainingUtils.hideProgress();
             $scope.form = {};
-            $state.go("app.main.products");
+            $state.go("app.main.testresults");
         }, function (err) {
             console.log("err " + JSON.stringify(err.message));
             trainingUtils.hideProgress();
@@ -35,7 +35,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
           trainingUtils.hideProgress();
           $scope.form = {};
           registerPush();
-          $state.go("app.main.products");
+          $state.go("app.main.testresults");
         }, function (err) {
             console.log("mic login error " + JSON.stringify(err.message));
             trainingUtils.showOkDialog("Error: " + err.message);
@@ -79,7 +79,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$kinvey', 'trainingU
                 console.log("login user " + JSON.stringify(user));
                 registerPush();
                 trainingUtils.hideProgress();
-                $state.go("app.main.products");
+                $state.go("app.main.testresults");
             }).catch(function(error) {
                 console.log("facebook login error " + JSON.stringify(error));
                 trainingUtils.hideProgress();

@@ -29,7 +29,7 @@ Choose how you'd like to run the app
 ### Data Model
 * Partner
   * partnername
-  * partnercopmany
+  * partnercompany
   * partneremail
 * Todo
   * action

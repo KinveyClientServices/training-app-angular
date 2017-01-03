@@ -21,7 +21,7 @@ app.run(function ($ionicPlatform, $state, $kinvey) {
         var user = $kinvey.User.getActiveUser();
         console.log("active user: " + JSON.stringify(user));
         if(user){
-            $state.go("app.main.products");
+            $state.go("app.main.testresults");
         }else{
             $state.go("app.login");
         }
@@ -35,8 +35,8 @@ app.run(['$kinvey', '$rootScope', '$location', function($kinvey, $rootScope, $lo
       event.preventDefault(); // Stop the location change
       // Initialize Kinvey
       $kinvey.initialize({
-        appKey: 'kid_Wy7NMiwaTx',
-        appSecret: '18e581bc9c7046a5b1b20ae838105126',
+        appKey: 'kid_rknbFHFBg',
+        appSecret: '980f522550a143edb1b86bdcfd42c564',
         apiHostname: 'https://baas.kinvey.com',
         micHostname: 'https://auth.kinvey.com',
         appVersion: '0.1.2'
@@ -78,30 +78,21 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
                 }
             }
         })
-        .state("app.main.products", {
-            url: "/products",
+        .state("app.main.testresults", {
+            url: "/testresults",
             views: {
-                'products-tab': {
-                    templateUrl: "templates/products.html",
-                    controller: "ProductsCtrl"
+                'testresults-tab': {
+                    templateUrl: "templates/testresults.html",
+                    controller: "TestResultsCtrl"
                 }
             }
         })
-        .state("app.main.partners", {
-            url: "/partners",
+        .state("app.main.surveys", {
+            url: "/surveys",
             views: {
-                'partners-tab': {
-                    templateUrl: "templates/partners.html",
-                    controller: "PartnersCtrl"
-                }
-            }
-        })
-        .state("app.main.todos", {
-            url: "/todos",
-            views: {
-                'todo-tab': {
-                    templateUrl: "templates/todos.html",
-                    controller: "TodoCtrl"
+                'surveys-tab': {
+                    templateUrl: "templates/surveys.html",
+                    controller: "SurveysCtrl"
                 }
             }
         })
@@ -114,40 +105,12 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
                 }
             }
         })
-        .state("app.insert", {
-            url: "/insert",
+        .state("app.submitSurvey", {
+            url: "/submitSurvey",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/insert.html",
-                    controller: "InsertCtrl"
-                }
-            }
-        })
-        .state("app.media", {
-            url: "/media",
-            cache:"false",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/medias.html",
-                    controller: "MediaCtrl"
-                }
-            }
-        })
-        .state("app.newMedia", {
-            url: "/newMedia",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/media.html",
-                    controller: "MediaEntityCtrl"
-                }
-            }
-        })
-        .state("app.newPartner", {
-            url: "/newPartner",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/partner.html",
-                    controller: "PartnerCtrl"
+                    templateUrl: "templates/submitsurvey.html",
+                    controller: "SubmitSurveyCtrl"
                 }
             }
         })

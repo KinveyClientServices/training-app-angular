@@ -2,23 +2,19 @@
 
 angular.module('myApp')
 
-    .controller('ProductsCtrl', ['$scope', '$kinvey','trainingUtils', function ($scope, $kinvey, trainingUtils) {
-        $scope.products = [];
-
-//        $kinvey.Push.onNotification(function(data) {
-//          console.log(data);
-//        });
+    .controller('TestResultsCtrl', ['$scope', '$kinvey','trainingUtils', function ($scope, $kinvey, trainingUtils) {
+        $scope.testresults = [];
 
         //TODO: LAB: Create a default data store. SDK defaults to Cache Store
-        var dataStore = $kinvey.DataStore.collection('Products');
+        var dataStore = $kinvey.DataStore.collection('TestResults');
 
-        //TODO: LAB: Get all products by query
-        //$scope.products
-        $scope.loadProducts = function(query){
+        //TODO: LAB: Get all testresults by query
+        //$scope.testresults
+        $scope.loadTestResults = function(query){
             trainingUtils.showProgress();
             dataStore.find(query).subscribe(function (result) {
                 console.log(JSON.stringify(result));
-                $scope.products = result;
+                $scope.testresults = result;
                 trainingUtils.hideProgress();
             }, function(err){
                 console.log("err " + JSON.stringify(err.message));
@@ -29,35 +25,35 @@ angular.module('myApp')
             });
         };
 
-        $scope.loadProducts();
+        $scope.loadTestResults();
 
-        //TODO: LAB: Sort Products
-        $scope.sortProducts = function(){
+        //TODO: LAB: Sort TestResults
+        $scope.sortTestResults = function(){
             var query = new $kinvey.Query();
             query.descending('productname');
-            $scope.loadProducts(query)
+            $scope.loadTestResults(query)
         };
 
-        //TODO: LAB: Limit Products by 4
-        $scope.limitProducts = function(){
+        //TODO: LAB: Limit TestResults by 4
+        $scope.limitTestResults = function(){
             var query = new $kinvey.Query();
             query.limit(4);
-            $scope.loadProducts(query)
+            $scope.loadTestResults(query)
         };
 
-        //TODO: LAB: Skip 0 and Limit 1 Product
-        $scope.skipProducts = function(){
+        //TODO: LAB: Skip 0 and Limit 1 TestResults
+        $scope.skipTestResults = function(){
             var query = new $kinvey.Query();
             query.skip(0);
             query.limit(1);
-            $scope.loadProducts(query)
+            $scope.loadTestResults(query)
         };
 
-        //TODO: LAB: Delete a Product
-        $scope.deleteProduct = function (product, index) {
+        //TODO: LAB: Delete a TestResult
+        $scope.deleteTestResult = function (testResult, index) {
             trainingUtils.showProgress();
-            dataStore.removeById(product._id).then(function (res) {
-                $scope.products.splice(index, 1);
+            dataStore.removeById(testResult._id).then(function (res) {
+                $scope.testresults.splice(index, 1);
                 $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {

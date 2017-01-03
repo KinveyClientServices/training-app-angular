@@ -1,26 +1,26 @@
 'use strict';
 
-angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','trainingUtils', '$state', function ($scope, $kinvey, trainingUtils, $state) {
+angular.module('myApp').controller('SurveysCtrl',  ['$scope', '$kinvey','trainingUtils', '$state', function ($scope, $kinvey, trainingUtils, $state) {
 
         $scope.$on('$ionicView.beforeEnter', function () {
             $scope.search = {
                 name: ""
             };
-            $scope.findPartners();
+            $scope.findSurveys();
         });
 
-        $scope.partners = [];
+        $scope.surveys = [];
 
-        //TODO: LAB: create a data store to access Partner APIs
-        var dataStore = $kinvey.DataStore.collection('Partner', $kinvey.DataStoreType.Sync);
+        //TODO: LAB: create a data store to access Survey APIs
+        var dataStore = $kinvey.DataStore.collection('Surveys', $kinvey.DataStoreType.Sync);
         dataStore.useDeltaFetch = true;
 
-        $scope.pullPartners = function () {
+        $scope.pullSurveys = function () {
             trainingUtils.showProgress();
           //TODO: LAB: Cache data from Kinvey cloud locally
             var query = new $kinvey.Query();
             dataStore.pull(query).then(function (result) {
-                $scope.partners = result;
+                $scope.surveys = result;
                 $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
@@ -30,7 +30,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             });
         };
 
-        $scope.pushPartners = function () {
+        $scope.pushSurveys = function () {
             trainingUtils.showProgress();
           //TODO: LAB: Push offline changes to Kinvey
             dataStore.push().then(function (result) {
@@ -58,7 +58,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             });
         };
 
-        $scope.syncPartners = function () {
+        $scope.syncSurveys = function () {
             trainingUtils.showProgress();
           //TODO: LAB: sync cached changes and get new updates
             dataStore.sync().then(function (syncResult) {
@@ -78,7 +78,7 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
                     trainingUtils.showOkDialog("Sync Failure: " + JSON.stringify(fails));
                 }else if(syncResult.pull){
                     trainingUtils.showOkDialog('Sync Completed');
-                    $scope.partners = syncResult.pull;
+                    $scope.surveys = syncResult.pull;
                 }
             }).catch(function (err) {
                 console.log("err " + JSON.stringify(err.message));
@@ -87,15 +87,15 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             });
         };
 
-        $scope.findPartners = function(searchName){
+        $scope.findSurveys = function(searchName){
             trainingUtils.showProgress();
             var query = new $kinvey.Query();
             if(searchName) {
-                query.matches("partnername", "^" + searchName);
+                query.matches("surveyname", "^" + searchName);
             }
-            //TODO: LAB: Get all Partners by query
+            //TODO: LAB: Get all Surveys by query
             dataStore.find(query).subscribe(function (result) {
-                $scope.partners = result;
+                $scope.surveys = result;
                 trainingUtils.hideProgress();
             }, function (error) {
                 console.log("err " + JSON.stringify(err.message));
@@ -106,24 +106,24 @@ angular.module('myApp').controller('PartnersCtrl',  ['$scope', '$kinvey','traini
             });
         };
     
-        $scope.addPartner = function () {
-            $state.go("app.newPartner");
+        $scope.addSurvey = function () {
+            $state.go("app.submitSurvey");
         };
     }])
-    .controller('PartnerCtrl', ['$scope', '$kinvey', '$ionicNavBarDelegate', "$state", "trainingUtils", function ($scope, $kinvey, $ionicNavBarDelegate, $state, trainingUtils) {
-        $scope.partner = {};
+    .controller('SubmitSurveyCtrl', ['$scope', '$kinvey', '$ionicNavBarDelegate', "$state", "trainingUtils", function ($scope, $kinvey, $ionicNavBarDelegate, $state, trainingUtils) {
+        $scope.survey = {};
 
-        //TODO: LAB: create a data store to save a partner
-        var dataStore = $kinvey.DataStore.collection('Partner', $kinvey.DataStoreType.Sync);
+        //TODO: LAB: create a data store to save a survey
+        var dataStore = $kinvey.DataStore.collection('Surveys', $kinvey.DataStoreType.Sync);
 
-        $scope.savePartner = function (partner) {
+        $scope.saveSurvey = function (survey) {
             trainingUtils.showProgress();
-            console.log("partner " + JSON.stringify(partner));
-          //TODO: LAB: Save a new Partner object to offline sync store
-            dataStore.save(partner).then(function (entity) {
+            console.log("survey " + JSON.stringify(survey));
+          //TODO: LAB: Save a new Survey object to offline sync store
+            dataStore.save(survey).then(function (entity) {
                 console.log("entity " + JSON.stringify(entity));
                 trainingUtils.hideProgress();
-                $state.go('app.main.partners');
+                $state.go('app.main.surveys');
             }).catch(function (err) {
                 console.log("error " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();

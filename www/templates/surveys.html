@@ -1,0 +1,27 @@
+<ion-view>
+    <ion-nav-title>
+        Surveys
+    </ion-nav-title>
+    <ion-content class="training-content center">
+
+        <label class="item-input-wrapper search-wrapper">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search by survey name..." ng-model="search.name">
+        </label>
+
+        <div class="button-bar">
+            <button class="button button-positive" ng-click="addSurvey()">Add</button>
+            <button class="button button-positive" ng-click="findSurveys(search.name)">Find</button>
+            <button class="button button-positive" ng-click="pullSurveys()">Pull</button>
+            <button class="button button-positive" ng-click="syncSurveys()">Sync</button>
+            <button class="button button-positive" ng-click="pushSurveys()">Push</button>
+        </div>
+
+        <ion-list>
+            <ion-item ng-repeat="survey in surveys">
+                <b>{{ survey.title }}</b>
+                <br/>{{ survey.rating }}<br/>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

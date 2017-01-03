@@ -1,0 +1,26 @@
+<ion-view>
+    <ion-nav-title>
+        TestResults
+    </ion-nav-title>
+    <ion-content class="training-content">
+        <div >
+        <div class="button-bar">
+            <button class="button button-positive" ng-click="sortTestResults()">Sort</button>
+            <button class="button button-positive" ng-click="skipTestResults()">Skip</button>
+            <button class="button button-positive" ng-click="limitTestResults()">Limit4</button>
+            <button class="button button-positive" ng-click="loadTestResults()">Reload data</button>
+        </div>
+            </div>
+
+        <ion-list>
+            <ion-item ng-repeat="testresult in testresults"
+                      class="item-button-right center">
+                <b>{{ testresult.testName }}</b>
+                <br/>{{ testresult.percentage }}
+                <button class="button button-assertive" ng-click="deleteTestResult(testresult, $index)">
+                    <i class="icon ion-trash-b"></i>
+                </button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
