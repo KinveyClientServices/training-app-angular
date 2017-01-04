@@ -18,9 +18,12 @@
         </div>
 
         <ion-list>
-            <ion-item ng-repeat="survey in surveys">
+            <ion-item ng-repeat="survey in surveys" class="item-button-right center">
                 <b>{{ survey.title }}</b>
                 <br/>{{ survey.rating }}<br/>
+                <button class="button button-assertive" ng-click="deleteSurvey(survey, $index)">
+                    <i class="icon ion-trash-b"></i>
+                </button>
             </ion-item>
         </ion-list>
     </ion-content>

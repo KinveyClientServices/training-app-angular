@@ -9,7 +9,6 @@ angular.module('myApp')
         var dataStore = $kinvey.DataStore.collection('TestResults');
 
         //TODO: LAB: Get all testresults by query
-        //$scope.testresults
         $scope.loadTestResults = function(query){
             trainingUtils.showProgress();
             dataStore.find(query).subscribe(function (result) {
@@ -57,7 +56,7 @@ angular.module('myApp')
                 $scope.$apply();
                 trainingUtils.hideProgress();
             }).catch(function (err) {
-                console.log("delete with error " + JSON.stringify(err.message));
+                console.log("delete test result error " + JSON.stringify(err.message));
                 trainingUtils.hideProgress();
                 trainingUtils.showOkDialog("Error: " + err.message);
             });

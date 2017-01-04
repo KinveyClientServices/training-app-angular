@@ -1,11 +1,4 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-
+// Has Kinvey been initialized?
 var initialized = false;
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', ['ionic','kinvey','ui.router']);
@@ -33,7 +26,6 @@ app.run(['$kinvey', '$rootScope', '$location', function($kinvey, $rootScope, $lo
   $rootScope.$on('$locationChangeStart', function(event, newUrl) {
     if (initialized === false) {
       event.preventDefault(); // Stop the location change
-      // Initialize Kinvey
       $kinvey.initialize({
         appKey: 'kid_rknbFHFBg',
         appSecret: '980f522550a143edb1b86bdcfd42c564',
@@ -44,7 +36,7 @@ app.run(['$kinvey', '$rootScope', '$location', function($kinvey, $rootScope, $lo
         initialized = true;
         $location.path($location.url(newUrl).hash); // Go to the page
       }).catch(function(error) {
-          // ...
+        console.log("Could not initialize Kinvey: " + JSON.stringify(err.message))
       });
     }
   });

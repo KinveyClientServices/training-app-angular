@@ -88,7 +88,7 @@ angular.module('myApp').controller('SurveysCtrl',  ['$scope', '$kinvey','trainin
         });
     };
 
-    $scope.findSurveys = function(searchName){
+    $scope.findSurveys = function(searchName) {
         trainingUtils.showProgress();
         //TODO: LAB: Create a Query object
         var query = new $kinvey.Query();
@@ -107,6 +107,19 @@ angular.module('myApp').controller('SurveysCtrl',  ['$scope', '$kinvey','trainin
             //completed
         });
     };
+
+    $scope.deleteSurvey = function(survey, index) {
+        trainingUtils.showProgress();
+        dataStore.removeById(survey._id).then(function (res) {
+            $scope.surveys.splice(index, 1);
+            $scope.$apply();
+            trainingUtils.hideProgress();
+        }).catch(function (err) {
+            console.log("delete survey error " + JSON.stringify(err.message));
+            trainingUtils.hideProgress();
+            trainingUtils.showOkDialog("Error: " + err.message);
+        });
+    }
 
     $scope.addSurvey = function () {
         $state.go("app.submitSurvey");
