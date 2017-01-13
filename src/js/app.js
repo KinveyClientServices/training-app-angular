@@ -11,18 +11,11 @@ app.run(function ($ionicPlatform, $state, $kinvey) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             cordova.plugins.Keyboard.disableScroll(true);
         }
-        var user = $kinvey.User.getActiveUser();
-        console.log("active user: " + JSON.stringify(user));
-        if(user){
-            $state.go("app.main.testresults");
-        }else{
-            $state.go("app.login");
-        }
     });
 });
 
 //TODO: LAB: initialize Kinvey
-app.run(['$kinvey', '$rootScope', '$location', function($kinvey, $rootScope, $location) {
+app.run(['$kinvey', '$rootScope', '$location', '$state', function($kinvey, $rootScope, $location, $state) {
   $rootScope.$on('$locationChangeStart', function(event, newUrl) {
     if (initialized === false) {
       event.preventDefault(); // Stop the location change
@@ -32,9 +25,13 @@ app.run(['$kinvey', '$rootScope', '$location', function($kinvey, $rootScope, $lo
         apiHostname: 'https://baas.kinvey.com',
         micHostname: 'https://auth.kinvey.com',
         appVersion: '0.1.2'
-      }).then(function() {
+      }).then(function(activeUser) {
         initialized = true;
-        $location.path($location.url(newUrl).hash); // Go to the page
+        if(!activeUser) {
+            $state.go('app.login');
+        } else {
+            $state.go('app.main.testresults');
+        }
       }).catch(function(error) {
         console.log("Could not initialize Kinvey: " + JSON.stringify(err.message))
       });
@@ -42,7 +39,7 @@ app.run(['$kinvey', '$rootScope', '$location', function($kinvey, $rootScope, $lo
   });
 }]);
 
-app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
+app.config(function ($stateProvider, $ionicConfigProvider) {
     $ionicConfigProvider.tabs.position('bottom');
     $stateProvider
         .state('app', {
@@ -123,8 +120,6 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
                     controller: "SyncCtrl"
                 }
             }
-        });
-
-    //$urlRouterProvider.otherwise("/app/login");
+        })
 });
 

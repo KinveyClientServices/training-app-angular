@@ -8,6 +8,7 @@ angular.module('myApp').controller('SubmitSurveyCtrl', ['$scope', '$kinvey', '$i
 
     $scope.saveSurvey = function (survey) {
         trainingUtils.showProgress();
+        survey.rating = parseInt(survey.rating);
         console.log("survey " + JSON.stringify(survey));
         //TODO: LAB: Save a new Survey object to offline sync store
         dataStore.save(survey).then(function (entity) {
