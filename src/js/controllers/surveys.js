@@ -14,7 +14,7 @@ angular.module('myApp').controller('SurveysCtrl',  ['$scope', '$kinvey','trainin
 
     //TODO: LAB: create a data store to access Survey APIs
     var dataStore = $kinvey.DataStore.collection('Surveys', $kinvey.DataStoreType.Sync);
-    dataStore.useDeltaFetch = true;
+    dataStore.useDeltaFetch = false;
 
     $scope.pullSurveys = function () {
         trainingUtils.showProgress();
@@ -25,7 +25,7 @@ angular.module('myApp').controller('SurveysCtrl',  ['$scope', '$kinvey','trainin
             $scope.$apply();
             trainingUtils.hideProgress();
         }).catch(function (err) {
-            console.log("err " + JSON.stringify(err.message));
+            console.log("pull error " + JSON.stringify(err.message));
             trainingUtils.hideProgress();
             trainingUtils.showOkDialog("Error: " + err.message);
         });
